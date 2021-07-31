@@ -4,6 +4,7 @@ so that's why I decided to implement it in Minecraft.
 
 This is a Minecraft plugin using the [Paper API](https://github.com/PaperMC/Paper "PaperMC") which visualizes
 different pathfinding algorithms on a 2D surface (for now).
+Developed and tested in Minecraft 1.17, may work in older versions.
 
 It is my free-time project, and it's work in progress.
 
@@ -23,7 +24,7 @@ of your Paper server.
 **/selectblockplane <y-level> <x1> <z1> <x2> <z2>**- select the
 plane corner coordinates where the pathfinding will take place.
 
-**/mode** - set the drawing mode. You can choose from path, visits and all.
+**/mode** - set the drawing mode. You can choose from `path`, `visits` and `all`.
 
 ### General commands
 **/start** - start the search and drawing.

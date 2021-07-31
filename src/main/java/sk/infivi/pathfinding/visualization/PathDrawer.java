@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.visualisation;
+package sk.infivi.pathfinding.visualization;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import sk.infivi.pathfinding.graph.NodeState;

@@ -7,9 +7,9 @@ import sk.infivi.pathfinding.algorithms.PathFindingAlgorithmResult;
 import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
 import sk.infivi.pathfinding.commands.Callback;
 import sk.infivi.pathfinding.graph.Graph;
-import sk.infivi.pathfinding.visualisation.BlockPlane;
-import sk.infivi.pathfinding.visualisation.DrawMode;
-import sk.infivi.pathfinding.visualisation.PathDrawer;
+import sk.infivi.pathfinding.visualization.BlockPlane;
+import sk.infivi.pathfinding.visualization.DrawMode;
+import sk.infivi.pathfinding.visualization.PathDrawer;
 
 public class Manager {
 

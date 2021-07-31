@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import sk.infivi.pathfinding.Manager;
-import sk.infivi.pathfinding.visualisation.DrawMode;
+import sk.infivi.pathfinding.visualization.DrawMode;
 
 public class SetMode implements CommandExecutor {
 

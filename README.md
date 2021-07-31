@@ -17,4 +17,21 @@ When you have the `.jar` file, just drop it in the `plugins` folder
 of your paper server.
 
 ## Commands
-Comming soon...
+**/help:Pathfinding** - view in-game help with all the commands.
+
+### Setting up
+**/setalgorithm** - set the algorithm used to pathfind.
+
+**/selectblockplane <y-level> <x1> <z1> <x2> <z2>**- select the
+plane corner coordinates where the pathfinding will take place.
+
+**/mode** - set the drawing mode. You can choose from path, visits and all.
+
+### General commands
+**/start** - start the search and drawing.
+
+**/speed** - tweak the drawing speed (1 - 10). Default is 10 (20 blocks per second).
+
+**/clear** - clear the plane. It is also cleared automatically before each search.
+
+**/getitems** - get the blocks which you can use to build your own walls, mazes etc.

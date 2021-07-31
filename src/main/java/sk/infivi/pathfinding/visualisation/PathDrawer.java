@@ -1,10 +1,10 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.visualisation;
+package sk.infivi.pathfinding.visualisation;
 
 import org.bukkit.scheduler.BukkitRunnable;
-import sk.infivi.pathfinding.pathfindingvisualisation.algorithms.PathFindingAlgorithmResult;
-import sk.infivi.pathfinding.pathfindingvisualisation.commands.Callback;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Node;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.NodeState;
+import sk.infivi.pathfinding.graph.NodeState;
+import sk.infivi.pathfinding.algorithms.PathFindingAlgorithmResult;
+import sk.infivi.pathfinding.commands.Callback;
+import sk.infivi.pathfinding.graph.Node;
 
 import java.util.List;
 

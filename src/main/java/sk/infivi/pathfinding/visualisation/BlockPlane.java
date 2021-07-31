@@ -1,11 +1,11 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.visualisation;
+package sk.infivi.pathfinding.visualisation;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Direction;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Graph;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Node;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.NodeType;
+import sk.infivi.pathfinding.graph.Direction;
+import sk.infivi.pathfinding.graph.Graph;
+import sk.infivi.pathfinding.graph.Node;
+import sk.infivi.pathfinding.graph.NodeType;
 
 public class BlockPlane {
 

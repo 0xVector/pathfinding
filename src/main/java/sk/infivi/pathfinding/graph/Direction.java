@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.graph;
+package sk.infivi.pathfinding.graph;
 
 public enum Direction {
     UP (0, 1),

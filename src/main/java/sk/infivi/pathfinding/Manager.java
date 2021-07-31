@@ -1,25 +1,25 @@
-package sk.infivi.pathfinding.pathfindingvisualisation;
+package sk.infivi.pathfinding;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import sk.infivi.pathfinding.pathfindingvisualisation.algorithms.PathFindingAlgorithmResult;
-import sk.infivi.pathfinding.pathfindingvisualisation.algorithms.PathfindingAlgorithm;
-import sk.infivi.pathfinding.pathfindingvisualisation.algorithms.PathfindingAlgorithmType;
-import sk.infivi.pathfinding.pathfindingvisualisation.commands.Callback;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Graph;
-import sk.infivi.pathfinding.pathfindingvisualisation.visualisation.BlockPlane;
-import sk.infivi.pathfinding.pathfindingvisualisation.visualisation.DrawMode;
-import sk.infivi.pathfinding.pathfindingvisualisation.visualisation.PathDrawer;
+import sk.infivi.pathfinding.algorithms.PathfindingAlgorithm;
+import sk.infivi.pathfinding.algorithms.PathFindingAlgorithmResult;
+import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
+import sk.infivi.pathfinding.commands.Callback;
+import sk.infivi.pathfinding.graph.Graph;
+import sk.infivi.pathfinding.visualisation.BlockPlane;
+import sk.infivi.pathfinding.visualisation.DrawMode;
+import sk.infivi.pathfinding.visualisation.PathDrawer;
 
 public class Manager {
 
-    private final PathfindingVisualisation plugin;
+    private final Pathfinding plugin;
     private BlockPlane blockPlane;
     private PathfindingAlgorithmType algorithmType;
     private DrawMode drawMode;
     private int speed = 1;
 
-    public Manager(PathfindingVisualisation plugin) {
+    public Manager(Pathfinding plugin) {
         this.plugin = plugin;
     }
 

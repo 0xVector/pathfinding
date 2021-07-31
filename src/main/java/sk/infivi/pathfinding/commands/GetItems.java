@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.commands;
+package sk.infivi.pathfinding.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

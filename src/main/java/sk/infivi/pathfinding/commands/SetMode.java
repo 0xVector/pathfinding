@@ -1,12 +1,11 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.commands;
+package sk.infivi.pathfinding.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import sk.infivi.pathfinding.pathfindingvisualisation.Manager;
-import sk.infivi.pathfinding.pathfindingvisualisation.algorithms.PathfindingAlgorithmType;
-import sk.infivi.pathfinding.pathfindingvisualisation.visualisation.DrawMode;
+import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.visualisation.DrawMode;
 
 public class SetMode implements CommandExecutor {
 

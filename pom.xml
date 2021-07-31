@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>sk.infivi.pathfinding</groupId>
-    <artifactId>PathfindingVisualisation</artifactId>
+    <artifactId>Pathfinding</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>PathfindingVisualisation</name>
+    <name>Pathfinding</name>
 
     <properties>
         <java.version>16</java.version>

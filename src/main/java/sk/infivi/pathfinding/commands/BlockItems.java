@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.commands;
+package sk.infivi.pathfinding.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -6,7 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.NodeType;
+import sk.infivi.pathfinding.graph.NodeType;
 
 import java.util.ArrayList;
 import java.util.List;

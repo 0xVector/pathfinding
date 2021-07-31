@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.algorithms;
+package sk.infivi.pathfinding.algorithms;
 
 public enum PathfindingAlgorithmType {
 

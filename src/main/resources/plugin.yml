@@ -1,6 +1,6 @@
-name: PathfindingVisualisation
+name: Pathfinding
 version: ${project.version}
-main: sk.infivi.pathfinding.pathfindingvisualisation.PathfindingVisualisation
+main: sk.infivi.pathfinding.Pathfinding
 api-version: 1.17
 commands:
 

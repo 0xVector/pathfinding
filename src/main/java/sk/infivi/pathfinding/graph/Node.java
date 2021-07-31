@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.graph;
+package sk.infivi.pathfinding.graph;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;

@@ -1,12 +1,12 @@
-package sk.infivi.pathfinding.pathfindingvisualisation;
+package sk.infivi.pathfinding;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import sk.infivi.pathfinding.pathfindingvisualisation.commands.*;
+import sk.infivi.pathfinding.commands.*;
 
 import java.util.logging.Logger;
 
-public final class PathfindingVisualisation extends JavaPlugin {
+public final class Pathfinding extends JavaPlugin {
 
     Logger logger = Bukkit.getLogger();
     Manager manager;
@@ -14,7 +14,7 @@ public final class PathfindingVisualisation extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        logger.info("Pathfinding Visualisation enabled!");
+        logger.info("Pathfinding enabled!");
         manager = new Manager(this);
 
         // command registration
@@ -29,6 +29,6 @@ public final class PathfindingVisualisation extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        logger.info("Pathfinding Visualisation disabled!");
+        logger.info("Pathfinding disabled!");
     }
 }

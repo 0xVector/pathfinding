@@ -1,6 +1,6 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.algorithms;
+package sk.infivi.pathfinding.algorithms;
 
-import sk.infivi.pathfinding.pathfindingvisualisation.graph.Node;
+import sk.infivi.pathfinding.graph.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;

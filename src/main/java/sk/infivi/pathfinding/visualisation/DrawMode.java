@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.pathfindingvisualisation.visualisation;
+package sk.infivi.pathfinding.visualisation;
 
 public enum DrawMode {
     PATH_ONLY,

@@ -27,7 +27,7 @@ public class PathDrawer extends BukkitRunnable {
                 break;
 
             case VISITS_ONLY:
-                pathStep = result.distanceToEndNode + 1;  // Consider path drawn
+                pathStep = result.path.size() + 1;  // Consider path drawn
                 break;
         }
     }

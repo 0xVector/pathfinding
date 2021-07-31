@@ -46,7 +46,7 @@ public class BFS implements PathfindingAlgorithm {
 
                 queue.add(adjacent);
                 nodeVisited.put(adjacent, true);
-                visitedInOrder.add(node);
+                visitedInOrder.add(adjacent);
 
                 // Own distance + distance from self to adjacent
                 distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentNodesAndDistance().get(adjacent));

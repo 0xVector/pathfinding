@@ -1,6 +1,4 @@
-# Pathfinding
-
-## Visualisation in Minecraft
+# Pathfinding visualisation in Minecraft
 Pathfinding is a cool concept that is best visualized on grids,
 so that's why I decided to implement it in Minecraft. 
 

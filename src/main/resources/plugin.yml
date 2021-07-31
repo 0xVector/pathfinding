@@ -1,0 +1,40 @@
+name: PathfindingVisualisation
+version: ${project.version}
+main: sk.infivi.pathfinding.pathfindingvisualisation.PathfindingVisualisation
+api-version: 1.17
+commands:
+
+  startsearch:
+    description: Start the search.
+    usage: /<command>
+    aliases:
+      - start
+      - run
+
+  setalgorithm:
+    description: Set the pathfinding algorithm.
+    usage: /<command> <algorithm>
+
+  selectblockplane:
+    description: Select the block plane to draw onto.
+    usage: /<command> <yLevel> <x1> <z1> <x2> <z2>
+
+  mode:
+    description: Set drawing mode.
+    usage: /<command> <mode>
+
+  speed:
+    description: Set the speed of drawing (1 - 10).
+    usage: /<command> <speed>
+
+  getitems:
+    description: Get items for pathfinding visualisation.
+    usage: /<command>
+    aliases:
+      - gi
+
+  clearplane:
+    description: Clear the plane.
+    usage: /<command>
+    aliases:
+      - c

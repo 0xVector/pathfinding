@@ -21,6 +21,8 @@ of your Paper server.
 **/help Pathfinding** - view in-game help with all the commands.
 
 ### Setting up
+**/options** - interactive, clickable and easy to use chat menu with all the options.
+
 **/setalgorithm** - set the algorithm used to pathfind.
 
 **/selectblockplane <y-level> <x1> <z1> <x2> <z2>**- select the

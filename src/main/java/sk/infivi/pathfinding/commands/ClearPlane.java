@@ -19,7 +19,7 @@ public class ClearPlane implements CommandExecutor {
 
         if (manager.getReady()) {
             manager.clearBlockPlane();
-            sender.sendMessage(ChatColor.GREEN + "\nPlane cleared!\n");
+            sender.sendMessage(ChatColor.GREEN + "Plane cleared!");
 
         } else {
             sender.sendMessage(ChatColor.RED + "You have to select the block plane first.");

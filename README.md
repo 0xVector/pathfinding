@@ -10,13 +10,15 @@ It is my free-time project, and it's work in progress.
 
 ## How to run it
 You can either try to build it on your own with Maven, or wait.
-Soon, I'll make releases with pre-compiled `JARs`.
+Soon, I'll make releases with pre-compiled jars.
 
-When you have the `.jar` file, just drop it in the `plugins` folder
+To build with Maven, run `mvn clean package`. The jar file will be in the `target` directory.
+
+When you have the jar file, just drop it in the `plugins` folder
 of your Paper server.
 
 ## Commands
-**/help:Pathfinding** - view in-game help with all the commands.
+**/help Pathfinding** - view in-game help with all the commands.
 
 ### Setting up
 **/setalgorithm** - set the algorithm used to pathfind.

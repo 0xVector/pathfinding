@@ -10,11 +10,11 @@ import sk.infivi.pathfinding.graph.NodeType;
 public class BlockPlane {
 
     public final World world;
-    private final int yLevel;
-    private final int xCoord1;
-    private final int zCoord1;
-    private final int xCoord2;
-    private final int zCoord2;
+    public final int yLevel;
+    public final int xCoord1;
+    public final int zCoord1;
+    public final int xCoord2;
+    public final int zCoord2;
 
     public BlockPlane(Location point1, Location point2) {
         this.world = point1.getWorld();

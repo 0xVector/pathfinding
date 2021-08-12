@@ -4,6 +4,12 @@ main: sk.infivi.pathfinding.Pathfinding
 api-version: 1.17
 commands:
 
+  options:
+    description: Set all options easily, in chat.
+    usage: /<command>
+    aliases:
+      - o
+
   startsearch:
     description: Start the search.
     usage: /<command>

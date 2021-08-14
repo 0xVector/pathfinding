@@ -13,6 +13,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.algorithms.PathfindingAlgorithm;
+import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
 import sk.infivi.pathfinding.visualization.BlockPlane;
 
 import static net.kyori.adventure.text.Component.newline;
@@ -47,11 +49,18 @@ public class Options implements CommandExecutor  {
 
             Player player = (Player) sender;
 
+            // Algorithms
+            TextComponent.Builder algorithmsComponent = Component.empty().toBuilder();
+            for (PathfindingAlgorithmType algorithm : PathfindingAlgorithmType.values()) {
+                algorithmsComponent.append(
+                getChoiceComponent(algorithm.name, "/setalgorithm " + algorithm.name, algorithm.description), space);
+            }
+
 
             // Block plane
             final BlockPlane blockPlane = manager.getBlockPlane();
-            final TextComponent.Builder blockPlaneComponent = text();
-            blockPlaneComponent.content("Block plane: ").style(optionName).append(space);
+            final TextComponent.Builder blockPlaneComponent = text("Block plane: ").style(optionName)
+                                                                .append(space).toBuilder();
 
             if (blockPlane != null) {
                 blockPlaneComponent.append(text(String.format("[%d, %d] to [%d, %d]",
@@ -79,20 +88,18 @@ public class Options implements CommandExecutor  {
 
 
                     .append(text("Algorithm: ", optionName)).append(space)
-                    .append(getChoiceComponent("BFS", "/setalgorithm BFS")).append(space)
-                    .append(getChoiceComponent("Dijkstra", "/setalgorithm DIJKSTRA")).append(space)
-                    .append(getChoiceComponent("A*", "/setalgorithm A*"))
+                    .append(algorithmsComponent)
                     .append(newline())
 
 
                     .append(text("Drawing mode: ", optionName)).append(space)
-                    .append(getChoiceComponent("Path-only", "/mode path")).append(space)
-                    .append(getChoiceComponent("Visits-only", "/mode visits")).append(space)
-                    .append(getChoiceComponent("All", "/mode all"))
+                    .append(getChoiceComponent("Path-only", "/mode path", "Draw only the final path.")).append(space)
+                    .append(getChoiceComponent("Visits-only", "/mode visits", "Draw only visits the algorithm makes.")).append(space)
+                    .append(getChoiceComponent("All", "/mode all", "Draw everything."))
                     .append(newline())
 
 
-                    .append(blockPlaneComponent.build())
+                    .append(blockPlaneComponent)
                     .append(newline())
 
 
@@ -129,9 +136,15 @@ public class Options implements CommandExecutor  {
         return false;
     }
 
-    private Component getChoiceComponent(String choiceText, String command) {
+    private Component getChoiceComponent(String choiceText, String command, String hoverDescription) {
+        TextComponent.Builder hoverComponent = Component.empty().toBuilder();
+        hoverComponent.append(hoverSelect);
+        if (!hoverDescription.isEmpty()) {
+            hoverComponent.append(newline(), text(hoverDescription, GREEN));
+        }
+
         return text(choiceText, optionChoice)
                 .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, command))
-                .hoverEvent(HoverEvent.showText(hoverSelect));
+                .hoverEvent(HoverEvent.showText(hoverComponent));
     }
 }

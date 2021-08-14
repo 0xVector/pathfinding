@@ -2,14 +2,19 @@ package sk.infivi.pathfinding.algorithms;
 
 public enum PathfindingAlgorithmType {
 
-    BFS (new BFS()),
-    DIJKSTRA (new BFS()),
-    A_STAR (new BFS());
+    BFS (new BFS(), "BFS", "Standard BFS."),
+    GREEDY_BFS (new GreedyBFS(), "Greedy-BFS", "A greedy variant of BFS."),
+    A_STAR (new BFS(), "A*", "A* desc"),
+    DIJKSTRA (new BFS(), "Dijkstra", "Dijksra desc");
 
-    private final PathfindingAlgorithm algorithm;
+    public final PathfindingAlgorithm algorithm;
+    public final String name;
+    public final String description;
 
-    PathfindingAlgorithmType(PathfindingAlgorithm algorithm) {
+    PathfindingAlgorithmType(PathfindingAlgorithm algorithm, String name, String description) {
         this.algorithm = algorithm;
+        this.name = name;
+        this.description = description;
     }
 
     public PathfindingAlgorithm getAlgorithm() {

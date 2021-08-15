@@ -17,9 +17,11 @@ commands:
       - start
       - run
 
-  setalgorithm:
+  algorithm:
     description: Set the pathfinding algorithm.
     usage: /<command> <algorithm>
+    aliases:
+      - al
 
   selectblockplane:
     description: Select the block plane to draw onto.

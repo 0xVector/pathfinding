@@ -29,7 +29,8 @@ public class SetMode implements CommandExecutor {
 
                 mode = DrawMode.PATH_ONLY;
 
-            } else if (modeString.equalsIgnoreCase("visits")) {
+            } else if (modeString.equalsIgnoreCase("visits")
+                    || modeString.equalsIgnoreCase("visits-only")) {
 
                 mode = DrawMode.VISITS_ONLY;
 

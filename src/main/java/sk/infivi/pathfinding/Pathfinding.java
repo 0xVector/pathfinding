@@ -18,9 +18,9 @@ public final class Pathfinding extends JavaPlugin {
         manager = new Manager(this);
 
         // command registration
-        getCommand("options").setExecutor(new Options(manager));
+        getCommand("options").setExecutor(new ChatOptions(manager));
         getCommand("startsearch").setExecutor(new StartSearch(manager));
-        getCommand("setalgorithm").setExecutor(new SetAlgorithm(manager));
+        getCommand("algorithm").setExecutor(new SetAlgorithm(manager));
         getCommand("selectblockplane").setExecutor(new SelectBlockPlane(manager));
         getCommand("mode").setExecutor(new SetMode(manager));
         getCommand("speed").setExecutor(new SetSpeed(manager));

@@ -55,6 +55,10 @@ public class Manager {
     }
 
     public int getSpeed() {
+        if (speed == 0) {
+            return 0; // TODO: this whole system is stupid, redo
+        }
+
         return 10 / speed;
     }
 

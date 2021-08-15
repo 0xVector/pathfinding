@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class Graph {
 
+    // TODO: Maybe store information about visited nodes directly in the graph?
+
     public Node startNode;
     public Node endNode;
     private Set<Node> nodes;

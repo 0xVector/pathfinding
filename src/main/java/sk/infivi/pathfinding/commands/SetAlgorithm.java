@@ -27,15 +27,25 @@ public class SetAlgorithm implements CommandExecutor {
 
             String algorithmString = args[0];
 
+            // TODO: Some smarter way
+
             if (algorithmString.equalsIgnoreCase("bfs")) {
 
                 algorithm = PathfindingAlgorithmType.BFS;
+
+            } else if (algorithmString.equalsIgnoreCase("greedy")
+                    || algorithmString.equalsIgnoreCase("greedy-bfs")
+                    || algorithmString.equalsIgnoreCase("greedy_bfs")) {
+
+                algorithm = PathfindingAlgorithmType.GREEDY_BFS;
 
             } else if (algorithmString.equalsIgnoreCase("dijkstra")) {
 
                 algorithm = PathfindingAlgorithmType.DIJKSTRA;
 
-            } else if (algorithmString.equalsIgnoreCase("a_star") || algorithmString.equalsIgnoreCase("a*") || algorithmString.equalsIgnoreCase("astar")) {
+            } else if (algorithmString.equalsIgnoreCase("a_star")
+                    || algorithmString.equalsIgnoreCase("a*")
+                    || algorithmString.equalsIgnoreCase("astar")) {
 
                 algorithm = PathfindingAlgorithmType.A_STAR;
             }

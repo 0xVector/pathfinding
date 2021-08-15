@@ -23,7 +23,7 @@ of your Paper server.
 ### Setting up
 **/options** - interactive, clickable and easy to use chat menu with all the options.
 
-**/setalgorithm** - set the algorithm used to pathfind.
+**/algorithm** - set the algorithm used to pathfind.
 
 **/selectblockplane <y-level> <x1> <z1> <x2> <z2>**- select the
 plane corner coordinates where the pathfinding will take place.

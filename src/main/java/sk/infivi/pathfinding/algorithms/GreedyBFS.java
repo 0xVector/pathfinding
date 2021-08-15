@@ -5,7 +5,7 @@ import sk.infivi.pathfinding.graph.Node;
 
 import java.util.*;
 
-public class BFS implements PathfindingAlgorithm {
+public class GreedyBFS implements PathfindingAlgorithm {
 
     private Queue<Node> queue;
     private HashMap<Node, Boolean> nodeVisited;
@@ -17,7 +17,7 @@ public class BFS implements PathfindingAlgorithm {
     @Override
     public void run(Graph graph) {
 
-        queue = new LinkedList<>();
+        queue = new PriorityQueue<>(new DistanceHeuristic(graph));
         nodeVisited = new HashMap<>();
         distanceToNode = new HashMap<>();
         previousNode = new HashMap<>();

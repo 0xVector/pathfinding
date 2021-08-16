@@ -50,35 +50,37 @@ public class ChatOptions implements CommandExecutor  {
 
         optionsMessage.append(
 
-                // Title
-                newline(),
-                text("========[ ", headerFooterStyle),
-                text("Options", titleStyle),
-                text(" ]========", headerFooterStyle),
-                newline(),
+            // Title
+            newline(),
+            text("=".repeat(8) + "[ ", headerFooterStyle),
+            text("Options", titleStyle),
+            text(" ]" + "=".repeat(8), headerFooterStyle),
+            newline(),
 
-                // Ready state
-                text("Ready: ", optionNameStyle), space,
-                text(manager.getReady(), LIGHT_PURPLE, ITALIC),
-                newline(), newline(),
-
-
-                // Algorithm selection
-                text("Algorithm: ", optionNameStyle), space,
-                getChoices(PathfindingAlgorithmType.values()),
-                newline(),
+            // Ready state
+            text("Ready: ", optionNameStyle), space,
+            text(manager.getReady(), LIGHT_PURPLE, ITALIC),
+            newline(), newline(),
 
 
-                // Drawing mode selection
-                text("Drawing mode: ", optionNameStyle), space,
-                getChoices(DrawMode.values()),
-                newline());
+            // Algorithm selection
+            text("Algorithm: ", optionNameStyle), space,
+            getChoices(PathfindingAlgorithmType.values()),
+            newline(),
 
 
-        // Block plane selection
+            // Drawing mode selection
+            text("Drawing mode: ", optionNameStyle), space,
+            getChoices(DrawMode.values()),
+            newline(),
+
+            // Block plane selection
+            text("Block plane: ", optionNameStyle), space);
+
+
+        // Block plane status
         final BlockPlane blockPlane = manager.getBlockPlane();
-        final TextComponent.Builder blockPlaneComponent = empty().toBuilder()
-                .append(text("Block plane: ", optionNameStyle), space);
+        final TextComponent.Builder blockPlaneComponent = empty().toBuilder();
 
         if (blockPlane != null) {
             blockPlaneComponent.append(
@@ -99,21 +101,15 @@ public class ChatOptions implements CommandExecutor  {
             }
 
             if (graph.startNode != null) {
-                hoverComponent.append(
-                        text("Start ", trueStyle), tick, space);
-
+                hoverComponent.append(text("Start ", trueStyle), tick, space);
             } else {
-                hoverComponent.append(
-                        text("Start ", falseStyle), cross, space);
+                hoverComponent.append(text("Start ", falseStyle), cross, space);
             }
 
             if (graph.endNode != null) {
-                hoverComponent.append(
-                        text("End ", trueStyle), tick);
-
+                hoverComponent.append(text("End ", trueStyle), tick);
             } else {
-                hoverComponent.append(
-                        text("End ", falseStyle), cross);
+                hoverComponent.append(text("End ", falseStyle), cross);
             }
 
             blockPlaneComponent.append(space, checkComponent.hoverEvent(HoverEvent.showText(hoverComponent)));
@@ -124,44 +120,42 @@ public class ChatOptions implements CommandExecutor  {
             .hoverEvent(HoverEvent.showText(text("Click to select the block plane.", GREEN)));
         }
 
-        blockPlaneComponent
-                .clickEvent(ClickEvent.suggestCommand("/selectblockplane "));
+        blockPlaneComponent.clickEvent(ClickEvent.suggestCommand("/selectblockplane "));
 
 
         optionsMessage.append(
 
-                blockPlaneComponent, newline(),
+            blockPlaneComponent, newline(),
 
-                // Drawing speed selection
-                text("Speed: ", optionNameStyle), space,
-                text(manager.getSpeed(), optionChoiceStyle)
-                        .clickEvent(ClickEvent.suggestCommand("/speed "))
-                        .hoverEvent(HoverEvent.showText(
-                                text("Click to set the drawing speed.", GREEN))),
-                newline(), newline(),
+            // Drawing speed selection
+            text("Speed: ", optionNameStyle), space,
+            text(manager.getSpeed(), optionChoiceStyle)
+                .clickEvent(ClickEvent.suggestCommand("/speed "))
+                .hoverEvent(HoverEvent.showText(
+                    text("Click to set the drawing speed.", GREEN))),
+            newline(), newline(),
 
 
-                // Start button
-                text("Start", DARK_GREEN, BOLD)
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/startsearch"))
-                        .hoverEvent(HoverEvent.showText(
-                                text("Click to start the search.", GREEN))), space,
+            // Start button
+            text("Start", DARK_GREEN, BOLD)
+                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/startsearch"))
+                .hoverEvent(HoverEvent.showText(
+                    text("Click to start the search.", GREEN))), space,
 
-                // Items button
-                text("Items", GOLD, BOLD)
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/getitems"))
-                        .hoverEvent(HoverEvent.showText(text("Click to get the items for building.", YELLOW))), space,
+            // Items button
+            text("Items", GOLD, BOLD)
+                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/getitems"))
+                .hoverEvent(HoverEvent.showText(text("Click to get the items for building.", YELLOW))), space,
 
-                // Clear button
-                text("Clear", DARK_RED, BOLD)
-                        .clickEvent(ClickEvent.runCommand("/clearplane"))
-                        .hoverEvent(HoverEvent.showText(text("Click to clear the block plane", RED)
-                                .append(newline())
-                                .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
+            // Clear button
+            text("Clear", DARK_RED, BOLD)
+                .clickEvent(ClickEvent.runCommand("/clearplane"))
+                .hoverEvent(HoverEvent.showText(text("Click to clear the block plane", RED)
+                    .append(newline())
+                    .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
 
-                // Footer
-                newline(),
-                text("===========================", headerFooterStyle));
+            // Footer
+            newline(), text("=".repeat(27), headerFooterStyle));
 
         sender.sendMessage(optionsMessage);
         return true;
@@ -172,10 +166,10 @@ public class ChatOptions implements CommandExecutor  {
 
         for (MenuOption choice : choices) {
             component.append(
-                    getChoiceComponent(
-                            choice.getName(),
-                            choice.getDescription(),
-                            choice.getCommand()), space);
+                getChoiceComponent(
+                    choice.getName(),
+                    choice.getDescription(),
+                    choice.getCommand()), space);
         }
 
         return component.build();
@@ -191,7 +185,7 @@ public class ChatOptions implements CommandExecutor  {
         }
 
         return text(choiceName, optionChoiceStyle)
-                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, command))
-                .hoverEvent(HoverEvent.showText(hoverComponent));
+            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, command))
+            .hoverEvent(HoverEvent.showText(hoverComponent));
     }
 }

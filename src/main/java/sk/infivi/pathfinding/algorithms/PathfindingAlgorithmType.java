@@ -31,7 +31,7 @@ public enum PathfindingAlgorithmType implements MenuOption {
     }
 
     @Override
-    public String getCommand() {
+    public String getCommandName() {
         return command;
     }
 

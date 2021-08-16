@@ -28,7 +28,7 @@ public enum DrawMode implements MenuOption  {
     }
 
     @Override
-    public String getCommand() {
+    public String getCommandName() {
         return command;
     }
 }

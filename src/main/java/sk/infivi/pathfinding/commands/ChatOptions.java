@@ -4,13 +4,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
@@ -140,14 +137,14 @@ public class ChatOptions implements CommandExecutor  {
             component.append(
                     getChoiceComponent(
                             choice.getName(),
-                            choice.getCommand() + " " + choice.getName(),
-                            choice.getDescription()), space);
+                            choice.getDescription(),
+                            choice.getCommand()), space);
         }
 
         return component.build();
     }
 
-    private Component getChoiceComponent(String choiceName, String command, String hoverDescription) {
+    private Component getChoiceComponent(String choiceName, String hoverDescription, String command) {
         TextComponent.Builder hoverComponent = Component.empty().toBuilder();
         hoverComponent.append(choiceHoverComponent);
 

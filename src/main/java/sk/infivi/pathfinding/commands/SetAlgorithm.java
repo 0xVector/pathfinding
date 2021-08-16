@@ -54,7 +54,7 @@ public class SetAlgorithm implements CommandExecutor {
             }
 
             manager.setAlgorithmType(algorithm);
-            sender.sendMessage(ChatColor.GREEN + "Algorithm set: " + algorithm());
+            sender.sendMessage(ChatColor.GREEN + "Algorithm set: " + algorithm);
             return true;
         }
 

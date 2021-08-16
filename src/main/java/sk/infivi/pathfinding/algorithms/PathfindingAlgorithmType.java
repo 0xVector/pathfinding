@@ -7,7 +7,8 @@ public enum PathfindingAlgorithmType implements MenuOption {
     BFS (new BFS(), "BFS", "Standard BFS."),
     GREEDY_BFS (new GreedyBFS(), "Greedy-BFS", "A greedy variant of BFS."),
     A_STAR (new AStar(), "A*", "A* pathfinding algorithm."),
-    DIJKSTRA (new BFS(), "Dijkstra", "Dijkstra desc");
+    DIJKSTRA (new BFS(), "Dijkstra", "Dijkstra algorithm."),
+    DFS (new DFS(), "DFS", "DFS pathfinding algorithm.");
 
     private static final String command = "/algorithm";
     private final PathfindingAlgorithm algorithm;

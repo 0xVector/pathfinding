@@ -48,10 +48,13 @@ public class SetAlgorithm implements CommandExecutor {
                     || algorithmString.equalsIgnoreCase("astar")) {
 
                 algorithm = PathfindingAlgorithmType.A_STAR;
+
+            } else if (algorithmString.equalsIgnoreCase("dfs")) {
+                algorithm = PathfindingAlgorithmType.DFS;
             }
 
             manager.setAlgorithmType(algorithm);
-            sender.sendMessage(ChatColor.GREEN + "Algorithm set: " + algorithm.toString());
+            sender.sendMessage(ChatColor.GREEN + "Algorithm set: " + algorithm());
             return true;
         }
 

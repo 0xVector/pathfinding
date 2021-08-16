@@ -17,7 +17,7 @@ public class ClearPlane implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (manager.getReady()) {
+        if (manager.getBlockPlane() != null) {
             manager.clearBlockPlane();
             sender.sendMessage(ChatColor.GREEN + "Plane cleared!");
 

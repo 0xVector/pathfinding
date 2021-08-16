@@ -73,7 +73,7 @@ public class ChatOptions implements CommandExecutor  {
             newline());
 
 
-        // Block plane selection
+        // Block plane selection TODO: Add information if valid (start + end set)
         final BlockPlane blockPlane = manager.getBlockPlane();
         final TextComponent.Builder blockPlaneComponent = empty().toBuilder();
 

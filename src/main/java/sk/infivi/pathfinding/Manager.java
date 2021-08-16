@@ -14,11 +14,9 @@ import sk.infivi.pathfinding.visualization.PathDrawer;
 public class Manager {
 
     private final Pathfinding plugin;
-
     private BlockPlane blockPlane;
     private PathfindingAlgorithmType algorithmType;
     private DrawMode drawMode;
-
     private int speed = 1;
 
     public Manager(Pathfinding plugin) {
@@ -27,10 +25,6 @@ public class Manager {
 
     public void setAlgorithmType(PathfindingAlgorithmType algorithmType) {
         this.algorithmType = algorithmType;
-    }
-
-    public PathfindingAlgorithmType getAlgorithmType() {
-        return algorithmType;
     }
 
     public void setBlockPlane(World world, int yLevel, int x1, int z1, int x2, int z2) {
@@ -58,16 +52,12 @@ public class Manager {
         if (speed == 0) {
             return 0; // TODO: this whole system is stupid, redo
         }
-
         return 10 / speed;
     }
 
-    public void clearBlockPlane() {
-        blockPlane.clear();
-    }
-
     public boolean getReady() {  // Check if we have all information needed
-        return algorithmType != null && blockPlane != null && drawMode != null;
+        return algorithmType != null && blockPlane != null && drawMode != null
+                && blockPlane.getGraph().checkGraph(); //TODO: better way
     }
 
     public PathFindingAlgorithmResult runSearch() {
@@ -85,6 +75,10 @@ public class Manager {
             PathDrawer pathDrawer = new PathDrawer(result, drawMode, callback);
             pathDrawer.runTaskTimer(plugin, 0, speed);
         }
+    }
+
+    public void clearBlockPlane() {
+        blockPlane.clear();
     }
 
 }

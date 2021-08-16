@@ -46,14 +46,8 @@ public class Graph {
         return endNode;
     }
 
-    public void printGraph() {
-        System.out.println("before loop: size: " + nodes.size());
-        for (Node node : nodes) {
-            System.out.println("adj nodes: " + node.getAdjacentNodesAndDistance().keySet().size());
-            for (Node adj : node.getAdjacentNodesAndDistance().keySet()) {
-                System.out.println((node.location.getX() * 1000 + Math.abs(node.location.getZ())) + " " + (adj.location.getX() * 1000 + Math.abs(adj.location.getZ())));
-            }
-        }
-        System.out.println("after loop");
+    // TODO: better....
+    public boolean checkGraph() {
+        return startNode != null && endNode != null;
     }
 }

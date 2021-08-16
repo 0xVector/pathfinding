@@ -7,24 +7,34 @@ import java.util.*;
 
 public class BFS implements PathfindingAlgorithm {
 
-    private Queue<Node> queue;
-    private HashMap<Node, Boolean> nodeVisited;
-    private HashMap<Node, Integer> distanceToNode;
-    private HashMap<Node, Node> previousNode;
-    private ArrayList<Node> visitedInOrder;
-    private Node start, end;
+    protected Queue<Node> queue;
+    protected HashMap<Node, Boolean> nodeVisited;
+    protected HashMap<Node, Integer> distanceToNode;
+    protected HashMap<Node, Node> previousNode;
+    protected ArrayList<Node> visitedInOrder;
+    protected Node start, end;
 
-    @Override
-    public void run(Graph graph) {
-
+    // Initialization of data structures
+    protected void initialize() {
         queue = new LinkedList<>();
         nodeVisited = new HashMap<>();
         distanceToNode = new HashMap<>();
         previousNode = new HashMap<>();
         visitedInOrder = new ArrayList<>();
+    }
+
+    // Condition checked before visiting a neighbour
+    protected boolean shouldVisit(Node current, Node adjacent) {
+        return !nodeVisited.getOrDefault(adjacent, false);
+    }
+
+    @Override
+    public void run(Graph graph) {
 
         start = graph.getStartNode();
         end = graph.getEndNode();
+
+        initialize();
 
         queue.add(start);
         nodeVisited.put(start, true);
@@ -38,20 +48,20 @@ public class BFS implements PathfindingAlgorithm {
             node = queue.remove();
 
             for (Node adjacent : node.getAdjacentNodesAndDistance().keySet()) {
-                if (nodeVisited.getOrDefault(adjacent, false)) {
-                    continue;
-                }
 
-                queue.add(adjacent);
-                nodeVisited.put(adjacent, true);
-                visitedInOrder.add(adjacent);
+                if (shouldVisit(node, adjacent)) {
 
-                // Own distance + distance from self to adjacent
-                distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentNodesAndDistance().get(adjacent));
-                previousNode.put(adjacent, node);
+                    queue.add(adjacent);
+                    nodeVisited.put(adjacent, true);
+                    visitedInOrder.add(adjacent);
 
-                if (adjacent == end) {
-                    return;
+                    // Own distance + distance from self to adjacent
+                    distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentNodesAndDistance().get(adjacent));
+                    previousNode.put(adjacent, node);
+
+                    if (adjacent == end) {
+                        return;
+                    }
                 }
             }
         }

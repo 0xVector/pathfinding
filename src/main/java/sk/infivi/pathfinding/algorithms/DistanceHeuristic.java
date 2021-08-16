@@ -7,16 +7,16 @@ import java.util.Comparator;
 
 public class DistanceHeuristic implements Comparator<Node> {
 
-    private Graph graph;
+    private Node endNode;
 
-    public DistanceHeuristic(Graph graph) {
-        this.graph = graph;
+    public DistanceHeuristic(Node endNode) {
+        this.endNode = endNode;
     }
 
     @Override
     public int compare(Node node1, Node node2) {
         return Double.compare(
-                Math.abs(node1.location.distance(graph.endNode.location)),
-                Math.abs(node2.location.distance(graph.endNode.location)));
+                Math.abs(node1.location.distance(endNode.location)),
+                Math.abs(node2.location.distance(endNode.location)));
     }
 }

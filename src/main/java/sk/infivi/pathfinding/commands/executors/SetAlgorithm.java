@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
 public class SetAlgorithm implements CommandExecutor {
 
@@ -54,7 +55,11 @@ public class SetAlgorithm implements CommandExecutor {
             }
 
             manager.setAlgorithmType(algorithm);
-            sender.sendMessage(ChatColor.GREEN + "Algorithm set: " + algorithm);
+
+            if (!manager.isSilent()) {
+                sender.sendMessage(
+                    GlobalStyles.getOptionSetComponent("Algorithm set: ", algorithm.getName()));
+            }
             return true;
         }
 

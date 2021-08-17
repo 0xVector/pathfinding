@@ -1,10 +1,11 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 import sk.infivi.pathfinding.visualization.DrawMode;
 
 public class SetMode implements CommandExecutor {
@@ -43,7 +44,11 @@ public class SetMode implements CommandExecutor {
             }
 
             manager.setDrawMode(mode);
-            sender.sendMessage(ChatColor.GREEN + "Drawing mode set: " + mode.toString());
+
+            if (!manager.isSilent()) {
+                sender.sendMessage(
+                    GlobalStyles.getOptionSetComponent("Drawing mode set: ", mode.getName()));
+            }
             return true;
         }
 

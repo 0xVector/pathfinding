@@ -1,15 +1,15 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
 public class SetSpeed implements CommandExecutor {
 
-    private Manager manager;
+    private final Manager manager;
 
     public SetSpeed(Manager manager) {
         this.manager = manager;
@@ -24,13 +24,17 @@ public class SetSpeed implements CommandExecutor {
 
             try {
                 speed = Integer.parseInt(args[0]);
-
             } catch (NumberFormatException e) {
                 return false;
             }
 
             manager.setSpeed(speed);
-            sender.sendMessage(ChatColor.GREEN + "Speed set: " + speed);
+
+            if (!manager.isSilent()) {
+                sender.sendMessage(
+                    GlobalStyles.getOptionSetComponent("Speed set: ", String.valueOf(speed)));
+            }
+
             return true;
         }
 

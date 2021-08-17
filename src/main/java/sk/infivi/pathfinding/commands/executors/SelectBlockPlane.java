@@ -1,5 +1,6 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -7,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
 public class SelectBlockPlane implements CommandExecutor {
 
@@ -42,8 +44,13 @@ public class SelectBlockPlane implements CommandExecutor {
             }
 
             manager.setBlockPlane(world, yLevel, x1, z1, x2, z2);
-            sender.sendMessage(ChatColor.GREEN
-                    + String.format("Block plane set: [%d, %d] to [%d, %d] at y-level %d", x1, z1, x2, z2, yLevel));
+
+            if (!manager.isSilent()) {
+                sender.sendMessage(
+                    GlobalStyles.getOptionSetComponent(
+                    "Block plane set: ", String.format("[%d, %d] to [%d, %d] at y-level %d", x1, z1, x2, z2, yLevel)));
+            }
+
             return true;
 
         } else {

@@ -33,7 +33,7 @@ commands:
 
   speed:
     description: Set the speed of drawing (1 - 10).
-    usage: /<command> <speed>
+    usage: /<command> <valuespeed>
 
   getitems:
     description: Get items for pathfinding visualisation.
@@ -46,3 +46,7 @@ commands:
     usage: /<command>
     aliases:
       - c
+
+  silent:
+    description: Toggle silent mode.
+    usage: /<command>

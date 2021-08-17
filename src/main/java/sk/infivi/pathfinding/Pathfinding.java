@@ -2,7 +2,7 @@ package sk.infivi.pathfinding;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import sk.infivi.pathfinding.commands.*;
+import sk.infivi.pathfinding.commands.executors.*;
 
 import java.util.logging.Logger;
 
@@ -26,6 +26,7 @@ public final class Pathfinding extends JavaPlugin {
         getCommand("speed").setExecutor(new SetSpeed(manager));
         getCommand("getitems").setExecutor(new GetItems());
         getCommand("clearplane").setExecutor(new ClearPlane(manager));
+        getCommand("silent").setExecutor(new SilentMode(manager));
     }
 
     @Override

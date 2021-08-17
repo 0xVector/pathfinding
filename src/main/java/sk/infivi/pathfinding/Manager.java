@@ -16,8 +16,11 @@ public class Manager {
     private final Pathfinding plugin;
     private BlockPlane blockPlane;
     private PathfindingAlgorithmType algorithmType;
+
     private DrawMode drawMode;
     private int speed = 1;
+
+    private boolean silent = false;
 
     public Manager(Pathfinding plugin) {
         this.plugin = plugin;
@@ -26,17 +29,22 @@ public class Manager {
     public void setAlgorithmType(PathfindingAlgorithmType algorithmType) {
         this.algorithmType = algorithmType;
     }
+    public PathfindingAlgorithmType getAlgorithmType() {
+        return algorithmType;
+    }
 
     public void setBlockPlane(World world, int yLevel, int x1, int z1, int x2, int z2) {
         blockPlane = new BlockPlane(new Location(world, x1, yLevel, z1), new Location(world, x2, yLevel, z2));
     }
-
     public BlockPlane getBlockPlane() {
         return blockPlane;
     }
 
     public void setDrawMode(DrawMode drawMode) {
         this.drawMode = drawMode;
+    }
+    public DrawMode getDrawMode() {
+        return drawMode;
     }
 
     public void setSpeed(int speed) {
@@ -47,12 +55,18 @@ public class Manager {
             this.speed = 10 / speed;
         }
     }
-
     public int getSpeed() {
         if (speed == 0) {
             return 0; // TODO: this whole system is stupid, redo
         }
         return 10 / speed;
+    }
+
+    public boolean isSilent() {
+        return silent;
+    }
+    public void setSilent(boolean silent) {
+        this.silent = silent;
     }
 
     public boolean getReady() {  // Check if we have all information needed

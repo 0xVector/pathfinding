@@ -1,4 +1,4 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.constants;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

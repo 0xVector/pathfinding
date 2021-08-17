@@ -1,10 +1,11 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import sk.infivi.pathfinding.Manager;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
 public class ClearPlane implements CommandExecutor {
 
@@ -19,10 +20,15 @@ public class ClearPlane implements CommandExecutor {
 
         if (manager.getBlockPlane() != null) {
             manager.clearBlockPlane();
-            sender.sendMessage(ChatColor.GREEN + "Plane cleared!");
+
+            if (!manager.isSilent()) {
+                sender.sendMessage(Component.text("Plane cleared!", GlobalStyles.success));
+            }
 
         } else {
-            sender.sendMessage(ChatColor.RED + "You have to select the block plane first.");
+            if (!manager.isSilent()) {
+                sender.sendMessage(Component.text("You have to select the block plane first.", GlobalStyles.fail));
+            }
         }
         return true;
     }

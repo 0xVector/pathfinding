@@ -1,16 +1,17 @@
-package sk.infivi.pathfinding.commands;
+package sk.infivi.pathfinding.commands.executors;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.Style;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
+import sk.infivi.pathfinding.commands.MenuOption;
+import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 import sk.infivi.pathfinding.graph.Graph;
 import sk.infivi.pathfinding.visualization.BlockPlane;
 import sk.infivi.pathfinding.visualization.DrawMode;
@@ -19,23 +20,10 @@ import static net.kyori.adventure.text.Component.*;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.BOLD;
 import static net.kyori.adventure.text.format.TextDecoration.ITALIC;
+import static sk.infivi.pathfinding.commands.constants.GlobalStyles.space;
+import static sk.infivi.pathfinding.commands.constants.GlobalStyles.*;
 
 public class ChatOptions implements CommandExecutor  {
-
-    // Constant components
-    static final Component choiceHoverComponent = text("Click to select", GREEN, BOLD);
-    static final Component space = text("   ");
-    static final Component tick = text("✔", GREEN, BOLD);
-    static final Component cross = text("✘", RED, BOLD);
-
-    // Styles
-    final static Style titleStyle = Style.style(GOLD, BOLD);
-    final static Style headerFooterStyle = Style.style(AQUA);
-    static final Style optionNameStyle = Style.style(BLUE, BOLD);
-    static final Style optionChoiceStyle = Style.style(GREEN, BOLD);
-    static final Style notSetStyle = Style.style(RED, ITALIC);
-    static final Style trueStyle = Style.style(GREEN);
-    static final Style falseStyle = Style.style(RED);
 
     private final Manager manager;
 
@@ -52,30 +40,35 @@ public class ChatOptions implements CommandExecutor  {
 
             // Title
             newline(),
-            text("=".repeat(8) + "[ ", headerFooterStyle),
-            text("Options", titleStyle),
-            text(" ]" + "=".repeat(8), headerFooterStyle),
-            newline(),
+            text("=".repeat(8) + "[ ", headerFooter),
+            text("Options", chatTitle),
+            text(" ]" + "=".repeat(8), headerFooter),
+            newline());
 
             // Ready state
-            text("Ready: ", optionNameStyle), space,
-            text(manager.getReady(), LIGHT_PURPLE, ITALIC),
+            if (manager.getReady()) {
+                optionsMessage.append(text("READY!", success.decorate(BOLD)));
+            } else {
+                optionsMessage.append(text("Not ready", fail.decorate(BOLD)));
+            }
+
+        optionsMessage.append(
             newline(), newline(),
 
 
             // Algorithm selection
-            text("Algorithm: ", optionNameStyle), space,
+            text("Algorithm: ", menuOptionName), space,
             getChoices(PathfindingAlgorithmType.values()),
             newline(),
 
 
             // Drawing mode selection
-            text("Drawing mode: ", optionNameStyle), space,
+            text("Drawing mode: ", menuOptionName), space,
             getChoices(DrawMode.values()),
             newline(),
 
             // Block plane selection
-            text("Block plane: ", optionNameStyle), space);
+            text("Block plane: ", menuOptionName), space);
 
 
         // Block plane status
@@ -84,7 +77,7 @@ public class ChatOptions implements CommandExecutor  {
 
         if (blockPlane != null) {
             blockPlaneComponent.append(
-                    text("Set ", optionChoiceStyle),
+                    text("Set ", menuOptionChoice),
                     text(String.format("([%d, %d] to [%d, %d])",
                             blockPlane.xCoord1, blockPlane.zCoord1, blockPlane.xCoord2, blockPlane.zCoord2), GREEN))
             .hoverEvent(HoverEvent.showText(text("Click to change.", GREEN)));
@@ -116,7 +109,7 @@ public class ChatOptions implements CommandExecutor  {
 
         } else {
             blockPlaneComponent
-                    .append(text("Not set", notSetStyle))
+                    .append(text("Not set", notSet))
             .hoverEvent(HoverEvent.showText(text("Click to select the block plane.", GREEN)));
         }
 
@@ -128,11 +121,20 @@ public class ChatOptions implements CommandExecutor  {
             blockPlaneComponent, newline(),
 
             // Drawing speed selection
-            text("Speed: ", optionNameStyle), space,
-            text(manager.getSpeed(), optionChoiceStyle)
+            text("Speed: ", menuOptionName), space,
+            text(manager.getSpeed(), menuOptionChoice)
                 .clickEvent(ClickEvent.suggestCommand("/speed "))
                 .hoverEvent(HoverEvent.showText(
                     text("Click to set the drawing speed.", GREEN))),
+            newline(),
+
+
+            // Silent status
+            text("Silent: ", menuOptionName), space,
+            text(manager.isSilent(), GlobalStyles.trueOrFalse(manager.isSilent()))
+                .clickEvent(ClickEvent.runCommand("/silent"))
+                .hoverEvent(HoverEvent.showText(
+                    text("Click to toggle silent status.", GREEN))),
             newline(), newline(),
 
 
@@ -155,7 +157,7 @@ public class ChatOptions implements CommandExecutor  {
                     .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
 
             // Footer
-            newline(), text("=".repeat(27), headerFooterStyle));
+            newline(), text("=".repeat(27), headerFooter));
 
         sender.sendMessage(optionsMessage);
         return true;
@@ -175,7 +177,7 @@ public class ChatOptions implements CommandExecutor  {
         return component.build();
     }
 
-    private Component getChoiceComponent(String choiceName, String hoverDescription, String command) {
+    private @NotNull Component getChoiceComponent(String choiceName, String hoverDescription, String command) {
         TextComponent.Builder hoverComponent = Component.empty().toBuilder();
         hoverComponent.append(choiceHoverComponent);
 
@@ -184,7 +186,7 @@ public class ChatOptions implements CommandExecutor  {
             hoverComponent.append(newline(), text(hoverDescription, GREEN));
         }
 
-        return text(choiceName, optionChoiceStyle)
+        return text(choiceName, menuOptionChoice)
             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, command))
             .hoverEvent(HoverEvent.showText(hoverComponent));
     }

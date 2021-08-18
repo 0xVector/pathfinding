@@ -1,6 +1,7 @@
 package sk.infivi.pathfinding.commands.constants;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
 
 import static net.kyori.adventure.text.Component.text;
@@ -11,13 +12,6 @@ public final class GlobalStyles {
 
     // No instantiation
     private GlobalStyles() {}
-
-    // Constant components
-    public static final Component choiceHoverComponent = text("Click to select", GREEN, BOLD);
-    public static final Component space = text("   ");
-    public static final Component tick = text("✔", GREEN, BOLD);
-    public static final Component cross = text("✘", RED, BOLD);
-
 
     // Styles
 
@@ -43,8 +37,18 @@ public final class GlobalStyles {
 
     public static final Style notSet = Style.style(RED, ITALIC);
 
+    public static final Style hoverPrompt = Style.style(GREEN, BOLD);
+    public static final Style hoverText = Style.style(WHITE, ITALIC);
+
     public static final Style trueStyle = Style.style(GREEN);
     public static final Style falseStyle = Style.style(RED);
+
+
+    // Constant components
+    public static final Component choiceHoverComponent = text("Click to select", hoverPrompt);
+    public static final Component space = text("   ");
+    public static final Component tick = text("✔", GREEN, BOLD);
+    public static final Component cross = text("✘", RED, BOLD);
 
 
     public static Component getOptionSetComponent(String name, String value) {

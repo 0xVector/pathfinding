@@ -4,9 +4,9 @@ import sk.infivi.pathfinding.commands.MenuOption;
 
 public enum DrawMode implements MenuOption  {
 
-    PATH_ONLY ("Path-only", "Draw only the final path."),
-    VISITS_ONLY ("Visits-only", "Draw only visits the algorithm makes."),
-    PATH_AND_VISITS ("All", "Draw everything.");
+    PATH_ONLY ("Path-only", "Draw only the final path"),
+    VISITS_ONLY ("Visits-only", "Draw only visits the algorithm makes"),
+    PATH_AND_VISITS ("All", "Draw everything");
 
     private static final String command = "/mode";
     private final String name;

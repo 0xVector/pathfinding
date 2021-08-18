@@ -19,8 +19,6 @@ import sk.infivi.pathfinding.visualization.DrawMode;
 import static net.kyori.adventure.text.Component.*;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.BOLD;
-import static net.kyori.adventure.text.format.TextDecoration.ITALIC;
-import static sk.infivi.pathfinding.commands.constants.GlobalStyles.space;
 import static sk.infivi.pathfinding.commands.constants.GlobalStyles.*;
 
 public class ChatOptions implements CommandExecutor  {
@@ -41,7 +39,9 @@ public class ChatOptions implements CommandExecutor  {
             // Title
             newline(),
             text("=".repeat(8) + "[ ", headerFooter),
-            text("Options", chatTitle),
+            text("Options", chatTitle)
+                .clickEvent(ClickEvent.runCommand("/options"))
+                .hoverEvent(HoverEvent.showText(text("Click to refresh.", menuOptionChoice))),
             text(" ]" + "=".repeat(8), headerFooter),
             newline());
 
@@ -110,7 +110,7 @@ public class ChatOptions implements CommandExecutor  {
         } else {
             blockPlaneComponent
                     .append(text("Not set", notSet))
-            .hoverEvent(HoverEvent.showText(text("Click to select the block plane.", GREEN)));
+            .hoverEvent(HoverEvent.showText(text("Click to select the block plane.", hoverPrompt)));
         }
 
         blockPlaneComponent.clickEvent(ClickEvent.suggestCommand("/selectblockplane "));
@@ -125,7 +125,7 @@ public class ChatOptions implements CommandExecutor  {
             text(manager.getSpeed(), menuOptionChoice)
                 .clickEvent(ClickEvent.suggestCommand("/speed "))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to set the drawing speed.", GREEN))),
+                    text("Click to set the drawing speed.", hoverPrompt))),
             newline(),
 
 
@@ -134,7 +134,7 @@ public class ChatOptions implements CommandExecutor  {
             text(manager.isSilent(), GlobalStyles.trueOrFalse(manager.isSilent()))
                 .clickEvent(ClickEvent.runCommand("/silent"))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to toggle silent status.", GREEN))),
+                    text("Click to toggle silent status.", hoverPrompt))),
             newline(), newline(),
 
 
@@ -183,7 +183,7 @@ public class ChatOptions implements CommandExecutor  {
 
         // Add description (if we have any)
         if (!hoverDescription.isEmpty()) {
-            hoverComponent.append(newline(), text(hoverDescription, GREEN));
+            hoverComponent.append(newline(), text(hoverDescription, hoverText));
         }
 
         return text(choiceName, menuOptionChoice)

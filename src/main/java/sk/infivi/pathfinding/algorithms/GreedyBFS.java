@@ -1,6 +1,8 @@
 package sk.infivi.pathfinding.algorithms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
 public class GreedyBFS extends BFS implements PathfindingAlgorithm {
 

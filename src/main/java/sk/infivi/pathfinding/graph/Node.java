@@ -3,7 +3,8 @@ package sk.infivi.pathfinding.graph;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Node {
 

@@ -19,6 +19,7 @@ import sk.infivi.pathfinding.visualization.DrawMode;
 import static net.kyori.adventure.text.Component.*;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.BOLD;
+import static sk.infivi.pathfinding.commands.constants.GlobalStyles.space;
 import static sk.infivi.pathfinding.commands.constants.GlobalStyles.*;
 
 public class ChatOptions implements CommandExecutor  {

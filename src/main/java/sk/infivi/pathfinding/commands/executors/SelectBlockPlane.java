@@ -1,7 +1,5 @@
 package sk.infivi.pathfinding.commands.executors;
 
-import net.kyori.adventure.text.Component;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

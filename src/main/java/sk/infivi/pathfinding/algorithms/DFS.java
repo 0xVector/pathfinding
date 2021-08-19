@@ -3,7 +3,9 @@ package sk.infivi.pathfinding.algorithms;
 import sk.infivi.pathfinding.graph.Graph;
 import sk.infivi.pathfinding.graph.Node;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
 
 public class DFS implements PathfindingAlgorithm {
 

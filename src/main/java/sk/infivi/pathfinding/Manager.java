@@ -2,8 +2,8 @@ package sk.infivi.pathfinding;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import sk.infivi.pathfinding.algorithms.PathfindingAlgorithm;
 import sk.infivi.pathfinding.algorithms.PathFindingAlgorithmResult;
+import sk.infivi.pathfinding.algorithms.PathfindingAlgorithm;
 import sk.infivi.pathfinding.algorithms.PathfindingAlgorithmType;
 import sk.infivi.pathfinding.commands.Callback;
 import sk.infivi.pathfinding.graph.Graph;

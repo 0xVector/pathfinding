@@ -75,7 +75,9 @@ public class Manager {
     }
 
     public PathFindingAlgorithmResult runSearch() {
-        clearBlockPlane();
+        blockPlane.clear();
+        blockPlane.setModified(); // Refresh, just to be sure
+
         Graph graph = blockPlane.getGraph();
         PathfindingAlgorithm algorithm = algorithmType.getAlgorithm();
 

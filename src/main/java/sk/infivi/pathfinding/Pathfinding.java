@@ -3,6 +3,7 @@ package sk.infivi.pathfinding;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import sk.infivi.pathfinding.commands.executors.*;
+import sk.infivi.pathfinding.events.BlockChange;
 
 import java.util.logging.Logger;
 
@@ -17,7 +18,7 @@ public final class Pathfinding extends JavaPlugin {
         logger.info("Pathfinding enabled!");
         manager = new Manager(this);
 
-        // command registration
+        // Command registration
         getCommand("options").setExecutor(new ChatOptions(manager));
         getCommand("startsearch").setExecutor(new StartSearch(manager));
         getCommand("algorithm").setExecutor(new SetAlgorithm(manager));
@@ -27,6 +28,9 @@ public final class Pathfinding extends JavaPlugin {
         getCommand("getitems").setExecutor(new GetItems());
         getCommand("clearplane").setExecutor(new ClearPlane(manager));
         getCommand("silent").setExecutor(new SilentMode(manager));
+
+        // Listener registration
+        getServer().getPluginManager().registerEvents(new BlockChange(manager), this);
     }
 
     @Override

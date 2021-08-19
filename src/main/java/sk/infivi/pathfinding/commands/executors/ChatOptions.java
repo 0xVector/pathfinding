@@ -85,21 +85,21 @@ public class ChatOptions implements CommandExecutor  {
             // Block plane validity check
             Component checkComponent;
             TextComponent.Builder hoverComponent = empty().toBuilder();
-            Graph graph = manager.getBlockPlane().getGraph(); // TODO: Performance??
+            Graph graph = manager.getBlockPlane().getGraph();
 
-            if (graph.startNode != null && graph.endNode != null) {
+            if (graph.getStartNode() != null && graph.getEndNode() != null) {
                 checkComponent = tick;
             } else {
                 checkComponent = cross;
             }
 
-            if (graph.startNode != null) {
+            if (graph.getStartNode() != null) {
                 hoverComponent.append(text("Start ", trueStyle), tick, space);
             } else {
                 hoverComponent.append(text("Start ", falseStyle), cross, space);
             }
 
-            if (graph.endNode != null) {
+            if (graph.getEndNode() != null) {
                 hoverComponent.append(text("End ", trueStyle), tick);
             } else {
                 hoverComponent.append(text("End ", falseStyle), cross);

@@ -16,6 +16,9 @@ public class BlockPlane {
     public final int xCoord2;
     public final int zCoord2;
 
+    private Graph graph;
+    private boolean modified = false;
+
     public BlockPlane(Location point1, Location point2) {
         this.world = point1.getWorld();
         this.yLevel = point1.getBlockY();
@@ -24,11 +27,15 @@ public class BlockPlane {
         this.zCoord1 = Math.min(point1.getBlockZ(), point2.getBlockZ());
         this.zCoord2 = Math.max(point1.getBlockZ(), point2.getBlockZ());
 
-        assert(point1.getWorld() == point2.getWorld());
+        assert(point1.getWorld() == point2.getWorld());  // TODO: unnecessary?
         assert(point1.getBlockY() == point2.getBlockY());
     }
 
-    public void clear() { // TODO: unify with setHighlighted method in Node
+    public void setModified() {
+        modified = true;
+    }
+
+    public void clear() {
         for (int x = xCoord1; x <= xCoord2; x++) {
             for (int z = zCoord1; z <= zCoord2; z++) {
                 world.getBlockAt(x, yLevel, z).setType(NodeType.cleanBlockType(world.getBlockAt(x, yLevel, z).getType()));
@@ -36,26 +43,31 @@ public class BlockPlane {
         }
     }
 
-    public Graph getGraph() {
-        // TODO validity check: multiple starts
+    public Graph getGraph() {  // TODO validity check: multiple starts
 
-        Graph graph = new Graph();
+        if (modified || graph == null) {
+            graph = new Graph();
+            modified = false;
 
-        for (int x = xCoord1; x <= xCoord2; x++) {
-            for (int z = zCoord1; z <= zCoord2; z++) {
-                NodeType type = NodeType.getTypeFromMaterial(world.getBlockAt(x, yLevel, z).getType());
-                graph.addNode(new Node(new Location(world, x, yLevel, z), type));
+            for (int x = xCoord1; x <= xCoord2; x++) {
+                for (int z = zCoord1; z <= zCoord2; z++) {
+                    NodeType type = NodeType.getTypeFromMaterial(world.getBlockAt(x, yLevel, z).getType());
+                    graph.addNode(new Node(new Location(world, x, yLevel, z), type));
+                }
+            }
+
+            for (Node node : graph.getNodes()) {
+                for (Direction direction : Direction.values()) {
+                    checkAndAddDirection(node, direction, graph);
+                }
             }
         }
-
-        for (Node node : graph.getNodes()) {
-            for (Direction direction : Direction.values()) {
-                checkAndAddDirection(node, direction, graph);
-            }
-        }
-
         return graph;
     }
+
+//    public Graph getGraph() {
+//        return getGraph(false);
+//    }
 
     private void checkAndAddDirection(Node node, Direction direction, Graph graph) {
         Node addAdjacentNode = graph.getNodeAt(node.location.getBlockX() + direction.relativeX,

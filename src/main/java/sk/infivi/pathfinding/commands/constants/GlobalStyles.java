@@ -1,9 +1,11 @@
 package sk.infivi.pathfinding.commands.constants;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
 
+import static net.kyori.adventure.text.Component.empty;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.*;
@@ -46,9 +48,11 @@ public final class GlobalStyles {
 
     // Constant components
     public static final Component choiceHoverComponent = text("Click to select", hoverPrompt);
-    public static final Component space = text("   ");
     public static final Component tick = text("✔", GREEN, BOLD);
     public static final Component cross = text("✘", RED, BOLD);
+    public static final Component space = text("   ")
+        .clickEvent(ClickEvent.suggestCommand(""))
+        .hoverEvent(HoverEvent.showText(empty()));
 
 
     public static Component getOptionSetComponent(String name, String value) {

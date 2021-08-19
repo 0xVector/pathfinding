@@ -1,5 +1,6 @@
 package sk.infivi.pathfinding.graph;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,9 +8,9 @@ public class Graph {
 
     // TODO: Maybe store information about visited nodes directly in the graph?
 
-    public Node startNode;
-    public Node endNode;
-    private Set<Node> nodes;
+    private final Set<Node> nodes;
+    private Node startNode;
+    private Node endNode;
 
     public Graph() {
         nodes = new HashSet<>();
@@ -25,11 +26,11 @@ public class Graph {
     }
 
     public Set<Node> getNodes() {
-        return nodes;
+        return Collections.unmodifiableSet(nodes);
     }
 
     public Node getNodeAt(int x, int z) {
-        // TODO: better implementation !!!
+        // TODO: better implementation - performance !!!
         for (Node node : nodes) {
             if (node.location.getX() == x && node.location.getZ() == z) {
                 return node;
@@ -46,7 +47,6 @@ public class Graph {
         return endNode;
     }
 
-    // TODO: better....
     public boolean checkGraph() {
         return startNode != null && endNode != null;
     }

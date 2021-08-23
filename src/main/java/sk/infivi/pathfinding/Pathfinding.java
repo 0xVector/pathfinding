@@ -28,6 +28,7 @@ public final class Pathfinding extends JavaPlugin {
         getCommand("getitems").setExecutor(new GetItems());
         getCommand("clearplane").setExecutor(new ClearPlane(manager));
         getCommand("silent").setExecutor(new SilentMode(manager));
+        getCommand("refresh").setExecutor(new RefreshMode(manager));
 
         // Listener registration
         getServer().getPluginManager().registerEvents(new BlockChange(manager), this);

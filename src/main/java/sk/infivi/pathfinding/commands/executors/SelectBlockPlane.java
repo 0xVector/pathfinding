@@ -49,6 +49,10 @@ public class SelectBlockPlane implements CommandExecutor {
                     "Block plane set: ", String.format("[%d, %d] to [%d, %d] at y-level %d", x1, z1, x2, z2, yLevel)));
             }
 
+            if (manager.getRefresh()) {
+                player.performCommand("options");
+            }
+
             return true;
 
         } else {

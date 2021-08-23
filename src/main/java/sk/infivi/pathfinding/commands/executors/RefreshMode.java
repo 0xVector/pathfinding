@@ -9,23 +9,22 @@ import org.jetbrains.annotations.NotNull;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
-public class SilentMode implements CommandExecutor {
+public class RefreshMode implements  CommandExecutor{
 
     private final Manager manager;
 
-    public SilentMode(Manager manager) {
+    public RefreshMode(Manager manager) {
         this.manager = manager;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        manager.setSilent(!manager.isSilent());
-
-        if (manager.isSilent()) {
-            sender.sendMessage(Component.text("Now silent.", GlobalStyles.quietInfo));
+        manager.setRefresh(!manager.getRefresh());
+        if (manager.getRefresh()) {
+            sender.sendMessage(Component.text("Refreshing turned on.", GlobalStyles.success));
         } else {
-            sender.sendMessage(Component.text("Not silent anymore!", GlobalStyles.success));
+            sender.sendMessage(Component.text("Refreshing turned off.", GlobalStyles.quietInfo));
         }
 
         if (manager.getRefresh() && sender instanceof Player) {

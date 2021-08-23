@@ -3,6 +3,7 @@ package sk.infivi.pathfinding.commands.executors;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 import sk.infivi.pathfinding.visualization.DrawMode;
@@ -48,6 +49,11 @@ public class SetMode implements CommandExecutor {
                 sender.sendMessage(
                     GlobalStyles.getOptionSetComponent("Drawing mode set: ", mode.getName()));
             }
+
+            if (manager.getRefresh() && sender instanceof Player) {
+                ((Player) sender).performCommand("options");
+            }
+
             return true;
         }
 

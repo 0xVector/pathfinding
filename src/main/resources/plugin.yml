@@ -50,3 +50,7 @@ commands:
   silent:
     description: Toggle silent mode.
     usage: /<command>
+
+  refresh:
+    description: Toggle refresh mode.
+    usage: /<command>

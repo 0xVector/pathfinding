@@ -3,6 +3,7 @@ package sk.infivi.pathfinding.commands.executors;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.algorithms.PathFindingAlgorithmResult;
 import sk.infivi.pathfinding.commands.Callback;
@@ -67,6 +68,10 @@ public class StartSearch implements CommandExecutor, Callback {
     public void callback() {
         if (sender != null && !manager.isSilent()) {
             sender.sendMessage(text("...done!", GlobalStyles.statusInfo));
+        }
+
+        if (manager.getRefresh() && sender instanceof Player) {
+            ((Player) sender).performCommand("options");
         }
     }
 }

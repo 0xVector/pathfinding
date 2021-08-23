@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.Style;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -42,7 +43,7 @@ public class ChatOptions implements CommandExecutor  {
             text("=".repeat(8) + "[ ", headerFooter),
             text("Options", chatTitle)
                 .clickEvent(ClickEvent.runCommand("/options"))
-                .hoverEvent(HoverEvent.showText(text("Click to refresh.", menuOptionChoice))),
+                .hoverEvent(HoverEvent.showText(text("Click to refresh.", hoverPrompt))),
             text(" ]" + "=".repeat(8), headerFooter),
             newline());
 
@@ -59,13 +60,13 @@ public class ChatOptions implements CommandExecutor  {
 
             // Algorithm selection
             text("Algorithm: ", menuOptionName), space,
-            getChoices(PathfindingAlgorithmType.values()),
+            getChoices(PathfindingAlgorithmType.values(), manager.getAlgorithmType()),
             newline(),
 
 
             // Drawing mode selection
             text("Drawing mode: ", menuOptionName), space,
-            getChoices(DrawMode.values()),
+            getChoices(DrawMode.values(), manager.getDrawMode()),
             newline(),
 
             // Block plane selection
@@ -136,6 +137,14 @@ public class ChatOptions implements CommandExecutor  {
                 .clickEvent(ClickEvent.runCommand("/silent"))
                 .hoverEvent(HoverEvent.showText(
                     text("Click to toggle silent status.", hoverPrompt))),
+            space, space, space,
+
+            // Refresh status
+            text("Refresh mode: ", menuOptionName), space,
+            text(manager.getRefresh(), GlobalStyles.trueOrFalse(manager.getRefresh()))
+                    .clickEvent(ClickEvent.runCommand("/refresh"))
+                    .hoverEvent(HoverEvent.showText(
+                            text("Click to toggle refresh mode.", hoverPrompt))),
             newline(), newline(),
 
 
@@ -164,21 +173,21 @@ public class ChatOptions implements CommandExecutor  {
         return true;
     }
 
-    public Component getChoices(MenuOption[] choices) {
+    private Component getChoices(MenuOption[] choices, Enum selected) {
         TextComponent.Builder component = Component.empty().toBuilder();
 
         for (MenuOption choice : choices) {
             component.append(
-                getChoiceComponent(
+                getSingleChoice(
                     choice.getName(),
                     choice.getDescription(),
-                    choice.getCommand()), space);
+                    choice.getCommand(), choice == selected), space);
         }
 
         return component.build();
     }
 
-    private @NotNull Component getChoiceComponent(String choiceName, String hoverDescription, String command) {
+    private @NotNull Component getSingleChoice(String choiceName, String hoverDescription, String command, boolean selected) {
         TextComponent.Builder hoverComponent = Component.empty().toBuilder();
         hoverComponent.append(choiceHoverComponent);
 
@@ -187,7 +196,14 @@ public class ChatOptions implements CommandExecutor  {
             hoverComponent.append(newline(), text(hoverDescription, hoverText));
         }
 
-        return text(choiceName, menuOptionChoice)
+        Style style;
+        if (selected) {
+            style = menuOptionSelected;
+        } else {
+            style = menuOptionChoice;
+        }
+
+        return text(choiceName, style)
             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, command))
             .hoverEvent(HoverEvent.showText(hoverComponent));
     }

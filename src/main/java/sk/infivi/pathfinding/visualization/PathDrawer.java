@@ -40,6 +40,10 @@ public class PathDrawer extends BukkitRunnable {
         } else {
             int repeat = Math.max(manager.getSpeed() - 5, 1);  // For every speed level >5, draw one more step
             for (int i = 0; i < repeat; i++) {
+                if (isCancelled()) {
+                    break;
+                }
+
                 step();
             }
         }

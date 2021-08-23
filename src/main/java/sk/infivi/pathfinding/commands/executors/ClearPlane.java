@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.commands.constants.GlobalStyles;
 
@@ -30,6 +31,11 @@ public class ClearPlane implements CommandExecutor {
                 sender.sendMessage(Component.text("You have to select the block plane first.", GlobalStyles.fail));
             }
         }
+
+        if (manager.getRefresh() && sender instanceof Player) {
+            ((Player) sender).performCommand("options");
+        }
+
         return true;
     }
 }

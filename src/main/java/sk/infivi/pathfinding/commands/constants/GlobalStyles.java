@@ -44,8 +44,8 @@ public final class GlobalStyles {
     public static final Style hoverPrompt = Style.style(GREEN, BOLD);
     public static final Style hoverText = Style.style(WHITE, ITALIC);
 
-    public static final Style trueStyle = Style.style(GREEN);
-    public static final Style falseStyle = Style.style(RED);
+    public static final Style trueStyle = Style.style(GREEN, ITALIC);
+    public static final Style falseStyle = Style.style(RED, ITALIC);
 
 
     // Constant components

@@ -43,18 +43,12 @@ public class Manager {
     }
 
     public void setSpeed(int speed) {
-        if (speed == 0) {
-            settings.speed = 0;
-
-        } else {
-            settings.speed = 10 / speed;
-        }
+        settings.speed = Math.min(
+                Math.max(speed, 0),
+                10);
     }
     public int getSpeed() {
-        if (settings.speed == 0) {
-            return 0; // TODO: this whole system is stupid, redo
-        }
-        return 10 / settings.speed;
+        return settings.speed;
     }
 
     public boolean isSilent() {
@@ -90,8 +84,15 @@ public class Manager {
 
     public void drawPath(PathFindingAlgorithmResult result, Callback callback) {
         if (result.successful) { // TODO: unsuccessful results drawing
-            PathDrawer pathDrawer = new PathDrawer(result, settings.drawMode, callback);
-            pathDrawer.runTaskTimer(plugin, 0, settings.speed);
+            PathDrawer pathDrawer = new PathDrawer(result, settings.drawMode, callback, this);
+
+            int tickPeriod;
+            if (settings.speed != 0) {
+                tickPeriod = (4 / settings.speed) * 4;
+            } else {
+                tickPeriod = 0;
+            }
+            pathDrawer.runTaskTimer(plugin, 0, tickPeriod);
         }
     }
 

@@ -24,7 +24,7 @@ commands:
       - al
 
   selectblockplane:
-    description: Select the block plane to draw onto.
+    description: Select the block plane to draw into.
     usage: /<command> <yLevel> <x1> <z1> <x2> <z2>
 
   mode:

@@ -10,22 +10,22 @@ public class Node {
 
     public final Location location;
     public final NodeType type;
-    private final Map<Node, Integer> adjacentNodesAndDistance;
 
-    public NodeState state = NodeState.NORMAL;
+    private final Map<Node, Integer> adjacentNodesByDistance;
+    private NodeState state = NodeState.NORMAL;
 
     public Node(Location location, NodeType nodeType){
         this.location = location;
         this.type = nodeType;
-        adjacentNodesAndDistance = new HashMap<>();
+        adjacentNodesByDistance = new HashMap<>();
     }
 
-    public void addAdjacentNode(Node destination, int distance) {
-        adjacentNodesAndDistance.put(destination, distance);
+    public void addAdjacent(Node adjacent, int distance) {
+        adjacentNodesByDistance.put(adjacent, distance);
     }
 
-    public Map<Node, Integer> getAdjacentNodesAndDistance() {
-        return adjacentNodesAndDistance;
+    public Map<Node, Integer> getAdjacentByDistance() {
+        return adjacentNodesByDistance;
     }
 
     public void setState(NodeState state, boolean effect) {
@@ -36,5 +36,9 @@ public class Node {
         }
 
         location.getBlock().setType(type.getBlockForState(state));
+    }
+
+    public NodeState getState() {
+        return state;
     }
 }

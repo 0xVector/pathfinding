@@ -2,19 +2,16 @@ package sk.infivi.pathfinding.visualization;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import sk.infivi.pathfinding.graph.Direction;
-import sk.infivi.pathfinding.graph.Graph;
-import sk.infivi.pathfinding.graph.Node;
-import sk.infivi.pathfinding.graph.NodeType;
+import sk.infivi.pathfinding.graph.*;
 
 public class BlockPlane {
 
     public final World world;
     public final int yLevel;
-    public final int xCoord1;
-    public final int zCoord1;
-    public final int xCoord2;
-    public final int zCoord2;
+    public final int x1;
+    public final int z1;
+    public final int x2;
+    public final int z2;
 
     private Graph graph;
     private boolean modified = false;
@@ -22,10 +19,10 @@ public class BlockPlane {
     public BlockPlane(Location point1, Location point2) {
         this.world = point1.getWorld();
         this.yLevel = point1.getBlockY();
-        this.xCoord1 = Math.min(point1.getBlockX(), point2.getBlockX());
-        this.xCoord2 = Math.max(point1.getBlockX(), point2.getBlockX());
-        this.zCoord1 = Math.min(point1.getBlockZ(), point2.getBlockZ());
-        this.zCoord2 = Math.max(point1.getBlockZ(), point2.getBlockZ());
+        this.x1 = Math.min(point1.getBlockX(), point2.getBlockX());
+        this.x2 = Math.max(point1.getBlockX(), point2.getBlockX());
+        this.z1 = Math.min(point1.getBlockZ(), point2.getBlockZ());
+        this.z2 = Math.max(point1.getBlockZ(), point2.getBlockZ());
 
         assert(point1.getWorld() == point2.getWorld());  // TODO: unnecessary?
         assert(point1.getBlockY() == point2.getBlockY());
@@ -36,23 +33,23 @@ public class BlockPlane {
     }
 
     public void clear() {
-        for (int x = xCoord1; x <= xCoord2; x++) {
-            for (int z = zCoord1; z <= zCoord2; z++) {
-                world.getBlockAt(x, yLevel, z).setType(NodeType.cleanBlockType(world.getBlockAt(x, yLevel, z).getType()));
-            }
+        for (Node node : getGraph().getNodes()) {
+            node.setState(NodeState.NORMAL, false);
         }
     }
 
-    public Graph getGraph() {  // TODO validity check: multiple starts
+    public Graph getGraph() {
 
         if (modified || graph == null) {
             graph = new Graph();
             modified = false;
 
-            for (int x = xCoord1; x <= xCoord2; x++) {
-                for (int z = zCoord1; z <= zCoord2; z++) {
+            for (int x = x1; x <= x2; x++) {
+                for (int z = z1; z <= z2; z++) {
                     NodeType type = NodeType.getTypeFromMaterial(world.getBlockAt(x, yLevel, z).getType());
-                    graph.addNode(new Node(new Location(world, x, yLevel, z), type));
+                    if (type != NodeType.OTHER) {
+                        graph.addNode(new Node(new Location(world, x, yLevel, z), type));
+                    }
                 }
             }
 
@@ -65,16 +62,12 @@ public class BlockPlane {
         return graph;
     }
 
-//    public Graph getGraph() {
-//        return getGraph(false);
-//    }
-
     private void checkAndAddDirection(Node node, Direction direction, Graph graph) {
-        Node addAdjacentNode = graph.getNodeAt(node.location.getBlockX() + direction.relativeX,
+        Node adjacentNode = graph.getNodeAt(node.location.getBlockX() + direction.relativeX,
                 node.location.getBlockZ() +  direction.relativeZ);
 
-        if (addAdjacentNode != null && addAdjacentNode.type.walkable) {
-            node.addAdjacentNode(addAdjacentNode, 1);
+        if (adjacentNode != null && adjacentNode.type.walkable) {
+            node.addAdjacent(adjacentNode, 1);
         }
     }
 }

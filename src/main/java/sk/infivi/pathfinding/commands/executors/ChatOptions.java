@@ -81,7 +81,7 @@ public class ChatOptions implements CommandExecutor  {
             blockPlaneComponent.append(
                     text("Set ", menuOptionChoice),
                     text(String.format("([%d, %d] to [%d, %d])",
-                            blockPlane.xCoord1, blockPlane.zCoord1, blockPlane.xCoord2, blockPlane.zCoord2), GREEN))
+                            blockPlane.x1, blockPlane.z1, blockPlane.x2, blockPlane.z2), GREEN))
             .hoverEvent(HoverEvent.showText(text("Click to change.", GREEN)));
 
             // Block plane validity check

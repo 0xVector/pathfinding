@@ -6,8 +6,8 @@ public enum Direction {
     RIGHT (1, 0),
     LEFT (-1 ,0);
 
-    public int relativeX;
-    public int relativeZ;
+    public final int relativeX;
+    public final int relativeZ;
     Direction(int relativeX, int relativeZ) {
         this.relativeX = relativeX;
         this.relativeZ = relativeZ;

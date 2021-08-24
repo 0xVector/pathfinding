@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class DFS implements PathfindingAlgorithm {
 
-    protected Stack<Node> queue;
+    protected Stack<Node> stack;
     protected HashMap<Node, Boolean> nodeVisited;
     protected HashMap<Node, Integer> distanceToNode;
     protected HashMap<Node, Node> previousNode;
@@ -18,7 +18,7 @@ public class DFS implements PathfindingAlgorithm {
 
     // Initialization of data structures
     protected void initialize() {
-        queue = new Stack<>();
+        stack = new Stack<>();
         nodeVisited = new HashMap<>();
         distanceToNode = new HashMap<>();
         previousNode = new HashMap<>();
@@ -38,7 +38,7 @@ public class DFS implements PathfindingAlgorithm {
 
         initialize();
 
-        queue.add(start);
+        stack.add(start);
         nodeVisited.put(start, true);
         distanceToNode.put(start, 0);
         previousNode.put(start, null);
@@ -46,19 +46,19 @@ public class DFS implements PathfindingAlgorithm {
 
         Node node;
 
-        while (!queue.isEmpty()) {
-            node = queue.pop();
+        while (!stack.isEmpty()) {
+            node = stack.pop();
 
-            for (Node adjacent : node.getAdjacentNodesAndDistance().keySet()) {
+            for (Node adjacent : node.getAdjacentByDistance().keySet()) {
 
                 if (shouldVisit(node, adjacent)) {
 
-                    queue.add(adjacent);
+                    stack.add(adjacent);
                     nodeVisited.put(adjacent, true);
                     visitedInOrder.add(adjacent);
 
                     // Own distance + distance from self to adjacent
-                    distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentNodesAndDistance().get(adjacent));
+                    distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentByDistance().get(adjacent));
                     previousNode.put(adjacent, node);
 
                     if (adjacent == end) {

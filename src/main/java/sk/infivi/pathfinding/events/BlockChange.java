@@ -86,9 +86,9 @@ public class BlockChange implements Listener {
         int z = location.getBlockZ();
 
         return y == blockPlane.yLevel
-                && blockPlane.xCoord1 <= x
-                && x <= blockPlane.xCoord2
-                && blockPlane.zCoord1 <= z
-                && z <= blockPlane.zCoord2;
+                && blockPlane.x1 <= x
+                && x <= blockPlane.x2
+                && blockPlane.z1 <= z
+                && z <= blockPlane.z2;
     }
 }

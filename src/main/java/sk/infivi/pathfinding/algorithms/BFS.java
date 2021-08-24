@@ -50,7 +50,7 @@ public class BFS implements PathfindingAlgorithm {
         while (!queue.isEmpty()) {
             node = queue.remove();
 
-            for (Node adjacent : node.getAdjacentNodesAndDistance().keySet()) {
+            for (Node adjacent : node.getAdjacentByDistance().keySet()) {
 
                 if (shouldVisit(node, adjacent)) {
 
@@ -59,7 +59,7 @@ public class BFS implements PathfindingAlgorithm {
                     visitedInOrder.add(adjacent);
 
                     // Own distance + distance from self to adjacent
-                    distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentNodesAndDistance().get(adjacent));
+                    distanceToNode.put(adjacent, distanceToNode.get(node) + node.getAdjacentByDistance().get(adjacent));
                     previousNode.put(adjacent, node);
 
                     if (adjacent == end) {

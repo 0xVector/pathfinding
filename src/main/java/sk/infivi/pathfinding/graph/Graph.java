@@ -1,19 +1,17 @@
 package sk.infivi.pathfinding.graph;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Graph {
 
-    // TODO: Maybe store information about visited nodes directly in the graph?
-
     private final Set<Node> nodes;
+    private final Map<Integer, Map<Integer, Node>> nodesByCoords;
     private Node startNode;
     private Node endNode;
 
     public Graph() {
         nodes = new HashSet<>();
+        nodesByCoords = new HashMap<>();
     }
 
     public void addNode(Node node) {
@@ -23,6 +21,9 @@ public class Graph {
             startNode = node;
         else if (node.type == NodeType.END)
             endNode = node;
+
+        nodesByCoords.putIfAbsent(node.location.getBlockX(), new HashMap<>());
+        nodesByCoords.get(node.location.getBlockX()).put(node.location.getBlockZ(), node);
     }
 
     public Set<Node> getNodes() {
@@ -30,13 +31,7 @@ public class Graph {
     }
 
     public Node getNodeAt(int x, int z) {
-        // TODO: better implementation - performance !!!
-        for (Node node : nodes) {
-            if (node.location.getX() == x && node.location.getZ() == z) {
-                return node;
-            }
-        }
-        return null;
+        return nodesByCoords.getOrDefault(x, Collections.emptyMap()).get(z);
     }
 
     public Node getStartNode() {

@@ -145,6 +145,19 @@ public class ChatOptions implements CommandExecutor  {
                     .clickEvent(ClickEvent.runCommand("/refresh"))
                     .hoverEvent(HoverEvent.showText(
                             text("Click to toggle refresh mode.", hoverPrompt))),
+                space, space, space,
+
+            // Random status
+            text("Random mode: ", menuOptionName), space,
+            text(manager.isRandom(), GlobalStyles.trueOrFalse(manager.isRandom()))
+                    .clickEvent(ClickEvent.runCommand("/random"))
+                    .hoverEvent(HoverEvent.showText(
+                            text("Click to toggle random mode.", hoverPrompt).append(newline()).append(
+                            text("Turning random mode off disables\n" +
+                                        " randomness in pathfinding algorithms\n" +
+                                        " by using data structures that\n" +
+                                        " guarantee ordering.\n" +
+                                        " Makes the algorithms deterministic.", hoverText)))),
             newline(), newline(),
 
 

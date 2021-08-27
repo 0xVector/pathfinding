@@ -4,6 +4,7 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Node {
@@ -14,10 +15,15 @@ public class Node {
     private final Map<Node, Integer> adjacentNodesByDistance;
     private NodeState state = NodeState.NORMAL;
 
-    public Node(Location location, NodeType nodeType){
+    public Node(Location location, NodeType nodeType, boolean random){
         this.location = location;
         this.type = nodeType;
-        adjacentNodesByDistance = new HashMap<>();
+
+        if (random)
+            adjacentNodesByDistance = new HashMap<>();
+        else
+            adjacentNodesByDistance = new LinkedHashMap<>();
+
     }
 
     public void addAdjacent(Node adjacent, int distance) {

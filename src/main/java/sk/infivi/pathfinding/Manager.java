@@ -29,7 +29,7 @@ public class Manager {
     }
 
     public void setBlockPlane(World world, int yLevel, int x1, int z1, int x2, int z2) {
-        settings.blockPlane = new BlockPlane(new Location(world, x1, yLevel, z1), new Location(world, x2, yLevel, z2));
+        settings.blockPlane = new BlockPlane(new Location(world, x1, yLevel, z1), new Location(world, x2, yLevel, z2), this);
     }
     public BlockPlane getBlockPlane() {
         return settings.blockPlane;
@@ -63,6 +63,12 @@ public class Manager {
     }
     public void setRefresh(boolean refresh) {
         settings.refresh = refresh;
+    }
+    public boolean isRandom() {
+        return settings.random;
+    }
+    public void setRandom(boolean random) {
+        settings.random = random;
     }
 
     public boolean getReady() {  // Check if we have all information needed

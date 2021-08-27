@@ -54,3 +54,7 @@ commands:
   refresh:
     description: Toggle refresh mode.
     usage: /<command>
+
+  random:
+    description: Toggle random mode.
+    usage: /<command>

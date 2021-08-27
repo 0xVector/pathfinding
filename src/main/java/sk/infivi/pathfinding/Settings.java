@@ -11,4 +11,5 @@ class Settings {
     public int speed = 5;  // 1-10, 0 means instant
     public boolean silent = false;
     public boolean refresh = false;
+    public boolean random = true;
 }

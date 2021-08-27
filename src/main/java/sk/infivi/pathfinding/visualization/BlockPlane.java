@@ -2,6 +2,7 @@ package sk.infivi.pathfinding.visualization;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import sk.infivi.pathfinding.Manager;
 import sk.infivi.pathfinding.graph.*;
 
 public class BlockPlane {
@@ -13,16 +14,19 @@ public class BlockPlane {
     public final int x2;
     public final int z2;
 
+    private final Manager manager;
     private Graph graph;
     private boolean modified = false;
 
-    public BlockPlane(Location point1, Location point2) {
+    public BlockPlane(Location point1, Location point2, Manager manager) {
         this.world = point1.getWorld();
         this.yLevel = point1.getBlockY();
         this.x1 = Math.min(point1.getBlockX(), point2.getBlockX());
         this.x2 = Math.max(point1.getBlockX(), point2.getBlockX());
         this.z1 = Math.min(point1.getBlockZ(), point2.getBlockZ());
         this.z2 = Math.max(point1.getBlockZ(), point2.getBlockZ());
+
+        this.manager = manager;
 
         assert(point1.getWorld() == point2.getWorld());  // TODO: unnecessary?
         assert(point1.getBlockY() == point2.getBlockY());
@@ -48,7 +52,7 @@ public class BlockPlane {
                 for (int z = z1; z <= z2; z++) {
                     NodeType type = NodeType.getTypeFromMaterial(world.getBlockAt(x, yLevel, z).getType());
                     if (type != NodeType.OTHER) {
-                        graph.addNode(new Node(new Location(world, x, yLevel, z), type));
+                        graph.addNode(new Node(new Location(world, x, yLevel, z), type, manager.isRandom()));
                     }
                 }
             }

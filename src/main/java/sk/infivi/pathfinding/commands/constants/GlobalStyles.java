@@ -8,8 +8,7 @@ import net.kyori.adventure.text.format.Style;
 import static net.kyori.adventure.text.Component.empty;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
-import static net.kyori.adventure.text.format.TextDecoration.BOLD;
-import static net.kyori.adventure.text.format.TextDecoration.ITALIC;
+import static net.kyori.adventure.text.format.TextDecoration.*;
 
 public final class GlobalStyles {
 
@@ -33,7 +32,7 @@ public final class GlobalStyles {
 
     // Chat option menu styles
     public static final Style chatTitle = Style.style(GOLD, BOLD);
-    public static final Style headerFooter = Style.style(AQUA);
+    public static final Style headerFooter = Style.style(AQUA, BOLD, STRIKETHROUGH);
 
     public static final Style menuOptionName = Style.style(BLUE, BOLD);
     public static final Style menuOptionChoice = Style.style(WHITE, BOLD);
@@ -52,9 +51,16 @@ public final class GlobalStyles {
     public static final Component choiceHoverComponent = text("Click to select", hoverPrompt);
     public static final Component tick = text("✔", GREEN, BOLD);
     public static final Component cross = text("✘", RED, BOLD);
-    public static final Component space = text("   ")
-        .clickEvent(ClickEvent.suggestCommand(""))
-        .hoverEvent(HoverEvent.showText(empty()));
+
+    public static Component getSpace(int length) {
+        return text(" ".repeat(length))
+            .clickEvent(ClickEvent.suggestCommand(""))
+            .hoverEvent(HoverEvent.showText(empty()));
+    }
+
+    public static Component getSpace() {
+        return getSpace(3);
+    }
 
 
     public static Component getOptionSetComponent(String name, String value) {

@@ -32,7 +32,7 @@ public class StartSearch implements CommandExecutor, Callback {
                 sender.sendMessage(
                     newline()
                     .append(text("Search started!", GlobalStyles.success))
-                    .append(GlobalStyles.space)
+                    .append(GlobalStyles.getSpace())
                     .append(text(String.format("(%s)", manager.getAlgorithmType().getName()),
                         GlobalStyles.chatOptionSetValue)));
             }

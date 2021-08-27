@@ -20,7 +20,6 @@ import sk.infivi.pathfinding.visualization.DrawMode;
 import static net.kyori.adventure.text.Component.*;
 import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.BOLD;
-import static sk.infivi.pathfinding.commands.constants.GlobalStyles.space;
 import static sk.infivi.pathfinding.commands.constants.GlobalStyles.*;
 
 public class ChatOptions implements CommandExecutor  {
@@ -40,11 +39,11 @@ public class ChatOptions implements CommandExecutor  {
 
             // Title
             newline(),
-            text("=".repeat(8) + "[ ", headerFooter),
+            text("=".repeat(15) + "[", headerFooter), getSpace(1),
             text("Options", chatTitle)
                 .clickEvent(ClickEvent.runCommand("/options"))
-                .hoverEvent(HoverEvent.showText(text("Click to refresh.", hoverPrompt))),
-            text(" ]" + "=".repeat(8), headerFooter),
+                .hoverEvent(HoverEvent.showText(text("Click to refresh.", hoverPrompt))), getSpace(1),
+            text("]" + "=".repeat(15), headerFooter),
             newline());
 
             // Ready state
@@ -54,23 +53,21 @@ public class ChatOptions implements CommandExecutor  {
                 optionsMessage.append(text("Not ready", fail.decorate(BOLD)));
             }
 
-        optionsMessage.append(
-            newline(), newline(),
-
+        optionsMessage.append(newline(),
 
             // Algorithm selection
-            text("Algorithm: ", menuOptionName), space,
+            text("Algorithm: ", menuOptionName), getSpace(),
             getChoices(PathfindingAlgorithmType.values(), manager.getAlgorithmType()),
             newline(),
 
 
             // Drawing mode selection
-            text("Drawing mode: ", menuOptionName), space,
+            text("Drawing mode: ", menuOptionName), getSpace(),
             getChoices(DrawMode.values(), manager.getDrawMode()),
             newline(),
 
             // Block plane selection
-            text("Block plane: ", menuOptionName), space);
+            text("Block plane: ", menuOptionName), getSpace());
 
 
         // Block plane status
@@ -82,7 +79,7 @@ public class ChatOptions implements CommandExecutor  {
                     text("Set ", menuOptionChoice),
                     text(String.format("([%d, %d] to [%d, %d])",
                             blockPlane.x1, blockPlane.z1, blockPlane.x2, blockPlane.z2), GREEN))
-            .hoverEvent(HoverEvent.showText(text("Click to change.", GREEN)));
+            .hoverEvent(HoverEvent.showText(text("Click to change.", hoverPrompt)));
 
             // Block plane validity check
             Component checkComponent;
@@ -96,9 +93,9 @@ public class ChatOptions implements CommandExecutor  {
             }
 
             if (graph.getStartNode() != null) {
-                hoverComponent.append(text("Start ", trueStyle), tick, space);
+                hoverComponent.append(text("Start ", trueStyle), tick, getSpace());
             } else {
-                hoverComponent.append(text("Start ", falseStyle), cross, space);
+                hoverComponent.append(text("Start ", falseStyle), cross, getSpace());
             }
 
             if (graph.getEndNode() != null) {
@@ -107,7 +104,7 @@ public class ChatOptions implements CommandExecutor  {
                 hoverComponent.append(text("End ", falseStyle), cross);
             }
 
-            blockPlaneComponent.append(space, checkComponent.hoverEvent(HoverEvent.showText(hoverComponent)));
+            blockPlaneComponent.append(getSpace(), checkComponent.hoverEvent(HoverEvent.showText(hoverComponent)));
 
         } else {
             blockPlaneComponent
@@ -123,7 +120,7 @@ public class ChatOptions implements CommandExecutor  {
             blockPlaneComponent, newline(),
 
             // Drawing speed selection
-            text("Speed: ", menuOptionName), space,
+            text("Speed: ", menuOptionName), getSpace(2),
             text(manager.getSpeed(), menuOptionChoice)
                 .clickEvent(ClickEvent.suggestCommand("/speed "))
                 .hoverEvent(HoverEvent.showText(
@@ -132,23 +129,23 @@ public class ChatOptions implements CommandExecutor  {
 
 
             // Silent status
-            text("Silent: ", menuOptionName), space,
+            text("Silent: ", menuOptionName), getSpace(),
             text(manager.isSilent(), GlobalStyles.trueOrFalse(manager.isSilent()))
                 .clickEvent(ClickEvent.runCommand("/silent"))
                 .hoverEvent(HoverEvent.showText(
                     text("Click to toggle silent status.", hoverPrompt))),
-            space, space, space,
+                getSpace(5),
 
             // Refresh status
-            text("Refresh mode: ", menuOptionName), space,
+            text("Refresh mode: ", menuOptionName), getSpace(),
             text(manager.getRefresh(), GlobalStyles.trueOrFalse(manager.getRefresh()))
                     .clickEvent(ClickEvent.runCommand("/refresh"))
                     .hoverEvent(HoverEvent.showText(
                             text("Click to toggle refresh mode.", hoverPrompt))),
-                space, space, space,
+                getSpace(5),
 
             // Random status
-            text("Random mode: ", menuOptionName), space,
+            text("Random mode: ", menuOptionName), getSpace(),
             text(manager.isRandom(), GlobalStyles.trueOrFalse(manager.isRandom()))
                     .clickEvent(ClickEvent.runCommand("/random"))
                     .hoverEvent(HoverEvent.showText(
@@ -162,15 +159,16 @@ public class ChatOptions implements CommandExecutor  {
 
 
             // Start button
+            getSpace(3),
             text("Start", DARK_GREEN, BOLD)
                 .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/startsearch"))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to start the search.", GREEN))), space,
+                    text("Click to start the search.", GREEN))), getSpace(7),
 
             // Items button
             text("Items", GOLD, BOLD)
                 .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/getitems"))
-                .hoverEvent(HoverEvent.showText(text("Click to get the items for building.", YELLOW))), space,
+                .hoverEvent(HoverEvent.showText(text("Click to get the items for building.", YELLOW))), getSpace(7),
 
             // Clear button
             text("Clear", DARK_RED, BOLD)
@@ -180,7 +178,7 @@ public class ChatOptions implements CommandExecutor  {
                     .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
 
             // Footer
-            newline(), text("=".repeat(27), headerFooter));
+            newline(), text("=".repeat(39), headerFooter));
 
         sender.sendMessage(optionsMessage);
         return true;
@@ -194,7 +192,7 @@ public class ChatOptions implements CommandExecutor  {
                 getSingleChoice(
                     choice.getName(),
                     choice.getDescription(),
-                    choice.getCommand(), choice == selected), space);
+                    choice.getCommand(), choice == selected), getSpace());
         }
 
         return component.build();

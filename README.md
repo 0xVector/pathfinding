@@ -21,7 +21,7 @@ of your Paper server.
 **/help Pathfinding** - view in-game help with all the commands.
 
 ### Setting up
-**/options** - interactive, clickable and easy to use chat menu with all the options.
+**/pathfinding** - interactive, clickable and easy to use chat menu with all options and controls.
 
 **/algorithm** - set the algorithm used to pathfind.
 

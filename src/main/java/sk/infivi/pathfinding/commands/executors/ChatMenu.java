@@ -22,11 +22,11 @@ import static net.kyori.adventure.text.format.NamedTextColor.*;
 import static net.kyori.adventure.text.format.TextDecoration.BOLD;
 import static sk.infivi.pathfinding.commands.constants.GlobalStyles.*;
 
-public class ChatOptions implements CommandExecutor  {
+public class ChatMenu implements CommandExecutor  {
 
     private final Manager manager;
 
-    public ChatOptions(Manager manager) {
+    public ChatMenu(Manager manager) {
         this.manager = manager;
     }
 
@@ -39,11 +39,11 @@ public class ChatOptions implements CommandExecutor  {
 
             // Title
             newline(),
-            text("=".repeat(15) + "[", headerFooter), getSpace(1),
-            text("Options", chatTitle)
+            text("=".repeat(13) + "[", headerFooter), getSpace(1),
+            text("Pathfinding", chatTitle)
                 .clickEvent(ClickEvent.runCommand("/options"))
                 .hoverEvent(HoverEvent.showText(text("Click to refresh.", hoverPrompt))), getSpace(1),
-            text("]" + "=".repeat(15), headerFooter),
+            text("]" + "=".repeat(13), headerFooter),
             newline());
 
             // Ready state
@@ -178,7 +178,7 @@ public class ChatOptions implements CommandExecutor  {
                     .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
 
             // Footer
-            newline(), text("=".repeat(39), headerFooter));
+            newline(), text("=".repeat(38), headerFooter));
 
         sender.sendMessage(optionsMessage);
         return true;

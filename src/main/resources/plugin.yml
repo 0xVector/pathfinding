@@ -4,11 +4,12 @@ main: sk.infivi.pathfinding.Pathfinding
 api-version: 1.17
 commands:
 
-  options:
-    description: Set all options easily, in chat.
+  pathfinding:
+    description: Control the plugin easily, in chat.
     usage: /<command>
     aliases:
-      - o
+      - menu
+      - options
 
   startsearch:
     description: Start the search.

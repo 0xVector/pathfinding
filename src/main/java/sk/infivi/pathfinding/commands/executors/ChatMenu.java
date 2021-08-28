@@ -42,7 +42,7 @@ public class ChatMenu implements CommandExecutor  {
             text("=".repeat(13) + "[", headerFooter), getSpace(1),
             text("Pathfinding", chatTitle)
                 .clickEvent(ClickEvent.runCommand("/options"))
-                .hoverEvent(HoverEvent.showText(text("Click to refresh.", hoverPrompt))), getSpace(1),
+                .hoverEvent(HoverEvent.showText(text("Click to refresh", hoverPrompt))), getSpace(1),
             text("]" + "=".repeat(13), headerFooter),
             newline());
 
@@ -79,7 +79,7 @@ public class ChatMenu implements CommandExecutor  {
                     text("Set ", menuOptionChoice),
                     text(String.format("([%d, %d] to [%d, %d])",
                             blockPlane.x1, blockPlane.z1, blockPlane.x2, blockPlane.z2), GREEN))
-            .hoverEvent(HoverEvent.showText(text("Click to change.", hoverPrompt)));
+            .hoverEvent(HoverEvent.showText(text("Click to change", hoverPrompt)));
 
             // Block plane validity check
             Component checkComponent;
@@ -109,7 +109,7 @@ public class ChatMenu implements CommandExecutor  {
         } else {
             blockPlaneComponent
                     .append(text("Not set", notSet))
-            .hoverEvent(HoverEvent.showText(text("Click to select the block plane.", hoverPrompt)));
+            .hoverEvent(HoverEvent.showText(text("Click to select the block plane", hoverPrompt)));
         }
 
         blockPlaneComponent.clickEvent(ClickEvent.suggestCommand("/selectblockplane "));
@@ -124,58 +124,69 @@ public class ChatMenu implements CommandExecutor  {
             text(manager.getSpeed(), menuOptionChoice)
                 .clickEvent(ClickEvent.suggestCommand("/speed "))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to set the drawing speed.", hoverPrompt))),
-            newline(),
+                    text("Click to set the drawing speed", hoverPrompt).append(newline()).append(
+                    text("""
+                        Value (1-10) that controls how fast
+                        the visualization is drawn.
+                        Set to 0 to draw instantly.""", hoverText)))),
+            newline(), newline(),
 
 
             // Silent status
-            text("Silent: ", menuOptionName), getSpace(),
-            text(manager.isSilent(), GlobalStyles.trueOrFalse(manager.isSilent()))
+            getSpace(5),
+            text("Silent", GlobalStyles.disabledEnabled(manager.isSilent()))
                 .clickEvent(ClickEvent.runCommand("/silent"))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to toggle silent status.", hoverPrompt))),
-                getSpace(5),
+                    text("Click to toggle silent status", hoverPrompt).append(newline()).append(
+                    text("""
+                        When silent, no messages from plugin
+                        will be shown in chat, except for
+                        this menu.""", hoverText)))),
+            getSpace(5),
 
             // Refresh status
-            text("Refresh mode: ", menuOptionName), getSpace(),
-            text(manager.getRefresh(), GlobalStyles.trueOrFalse(manager.getRefresh()))
-                    .clickEvent(ClickEvent.runCommand("/refresh"))
-                    .hoverEvent(HoverEvent.showText(
-                            text("Click to toggle refresh mode.", hoverPrompt))),
-                getSpace(5),
+            text("Refresh", GlobalStyles.disabledEnabled(manager.getRefresh()))
+                .clickEvent(ClickEvent.runCommand("/refresh"))
+                .hoverEvent(HoverEvent.showText(
+                    text("Click to toggle refresh mode", hoverPrompt).append(newline()).append(
+                    text("""
+                        When refresh mode is enabled, this
+                        menu will be updated with every
+                        change made.""", hoverText)))),
+            getSpace(5),
 
             // Random status
-            text("Random mode: ", menuOptionName), getSpace(),
-            text(manager.isRandom(), GlobalStyles.trueOrFalse(manager.isRandom()))
-                    .clickEvent(ClickEvent.runCommand("/random"))
-                    .hoverEvent(HoverEvent.showText(
-                            text("Click to toggle random mode.", hoverPrompt).append(newline()).append(
-                            text("Turning random mode off disables\n" +
-                                        " randomness in pathfinding algorithms\n" +
-                                        " by using data structures that\n" +
-                                        " guarantee ordering.\n" +
-                                        " Makes the algorithms deterministic.", hoverText)))),
+            text("Random", GlobalStyles.disabledEnabled(manager.isRandom()))
+                .clickEvent(ClickEvent.runCommand("/random"))
+                .hoverEvent(HoverEvent.showText(
+                    text("Click to toggle random mode", hoverPrompt).append(newline()).append(
+                    text("""
+                        Turning random mode off disables
+                        randomness in pathfinding algorithms
+                        by using data structures that
+                        guarantee ordering.
+                        Makes the algorithms deterministic.""", hoverText)))),
             newline(), newline(),
 
 
             // Start button
-            getSpace(3),
+            getSpace(5),
             text("Start", DARK_GREEN, BOLD)
                 .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/startsearch"))
                 .hoverEvent(HoverEvent.showText(
-                    text("Click to start the search.", GREEN))), getSpace(7),
+                    text("Click to start the search", GREEN, BOLD))), getSpace(7),
 
             // Items button
             text("Items", GOLD, BOLD)
                 .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/getitems"))
-                .hoverEvent(HoverEvent.showText(text("Click to get the items for building.", YELLOW))), getSpace(7),
+                .hoverEvent(HoverEvent.showText(text("Click to get the items for building", YELLOW, BOLD))), getSpace(7),
 
             // Clear button
             text("Clear", DARK_RED, BOLD)
                 .clickEvent(ClickEvent.runCommand("/clearplane"))
-                .hoverEvent(HoverEvent.showText(text("Click to clear the block plane", RED)
+                .hoverEvent(HoverEvent.showText(text("Click to clear the block plane", RED, BOLD)
                     .append(newline())
-                    .append(text("Doesn't destroy walls or alter your terrain in any way.", RED)))),
+                    .append(text("Doesn't destroy walls or alter your terrain in any way.", hoverText)))),
 
             // Footer
             newline(), text("=".repeat(38), headerFooter));

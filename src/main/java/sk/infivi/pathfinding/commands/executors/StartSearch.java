@@ -57,7 +57,7 @@ public class StartSearch implements CommandExecutor, Callback {
 
         } else {
             if (!manager.isSilent()) {
-                sender.sendMessage(text("You have to specify all information first.", GlobalStyles.fail));
+                sender.sendMessage(text("You have to specify all options first.", GlobalStyles.fail));
             }
         }
 

@@ -36,15 +36,18 @@ public final class GlobalStyles {
 
     public static final Style menuOptionName = Style.style(BLUE, BOLD);
     public static final Style menuOptionChoice = Style.style(WHITE, BOLD);
-    public static final Style menuOptionSelected = Style.style(GREEN, BOLD);
+    public static final Style menuOptionSelected = Style.style(GREEN, BOLD, UNDERLINED);
 
     public static final Style notSet = Style.style(RED, ITALIC);
 
     public static final Style hoverPrompt = Style.style(GREEN, BOLD);
-    public static final Style hoverText = Style.style(WHITE, ITALIC);
+    public static final Style hoverText = Style.style(WHITE, BOLD.as(State.FALSE));
 
     public static final Style trueStyle = Style.style(GREEN, ITALIC);
     public static final Style falseStyle = Style.style(RED, ITALIC);
+
+    public static final Style enabled = Style.style(GREEN, BOLD);
+    public static final Style disabled = Style.style(GRAY, BOLD);
 
 
     // Constant components
@@ -68,10 +71,10 @@ public final class GlobalStyles {
                text(value, GlobalStyles.chatOptionSetValue));
     }
 
-    public static Style trueOrFalse(boolean value) {
+    public static Style disabledEnabled(boolean value) {
         if (value) {
-            return trueStyle;
+            return enabled;
         }
-        return falseStyle;
+        return disabled;
     }
 }

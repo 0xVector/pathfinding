@@ -203,7 +203,9 @@ public class ChatMenu implements CommandExecutor  {
                 getSingleChoice(
                     choice.getName(),
                     choice.getDescription(),
-                    choice.getCommand(), choice == selected), getSpace());
+                    choice.getCommand(),
+            choice == selected),
+                getSpace());
         }
 
         return component.build();

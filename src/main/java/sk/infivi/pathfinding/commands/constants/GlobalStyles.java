@@ -36,7 +36,7 @@ public final class GlobalStyles {
 
     public static final Style menuOptionName = Style.style(BLUE, BOLD);
     public static final Style menuOptionChoice = Style.style(WHITE, BOLD);
-    public static final Style menuOptionSelected = Style.style(GREEN, BOLD, UNDERLINED);
+    public static final Style menuOptionSelected = Style.style(GREEN, BOLD);
 
     public static final Style notSet = Style.style(RED, ITALIC);
 
